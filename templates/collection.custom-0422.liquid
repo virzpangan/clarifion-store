@@ -1,128 +1,148 @@
-
-
 <style>
-.col-catalog .sc-list .list-wrapper{
-  position:relative;
-}
+  .col-catalog .sc-list .list-wrapper {
+    position: relative;
+  }
   .col-catalog .sc-title .title-wrapper {
-   	max-width: 100%!important; 
+    max-width: 100% !important;
+  }
+  .col-catalog .sc-title .title-wrapper p {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 775px;
+    line-height: 1.8;
   }
   .col-catalog .sc-title {
-    padding-top:30px!important;
-    padding-bottom:15px!important;
+    padding-top: 30px !important;
+    padding-bottom: 15px !important;
   }
   .col-catalog .sc-list {
-    padding-top:40px!important;
+    padding-top: 40px !important;
   }
-  .tag-deal{
-position: absolute;
-top: 0;
+  .tag-deal {
+    position: absolute;
+    top: 0;
     left: 0;
-color:#fff;
-background-color: #143075;
-   font-size:14px;
-    font-weight:700;
+    color: #fff;
+    background-color: #143075;
+    font-size: 14px;
+    font-weight: 700;
     padding: 5px 10px;
-}
+  }
   @media screen and (max-width: 520px) {
-	.col-catalog .sc-list {
-      	padding-top:5px!important;
-	}
+    .col-catalog .sc-list {
+      padding-top: 5px !important;
+    }
     .col-catalog .sc-list .list-wrapper {
-		padding: 20px 15px!important;
-	}
+      padding: 20px 15px !important;
+    }
     .col-catalog .sc-title .title-wrapper h2 {
-      	margin-bottom:10px!important;
+      margin-bottom: 10px !important;
     }
     .col-catalog .sc-list .list-content-wrapper p {
-     	letter-spacing: -.15px; 
+      letter-spacing: -0.15px;
     }
     .col-catalog .sc-title {
-      padding-top:15px!important;
-      padding-bottom:10px!important;
+      padding-top: 15px !important;
+      padding-bottom: 10px !important;
     }
   }
 </style>
 <div class="col-catalog">
-    <div class="sc-title">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="title-wrapper text-center">
-                        <h4>All Products</h4>
-                        <h2>Fresher air in any room, on any budget</h2>
-                        <p>Discover our fresh air solutions that support you and your family.</p>
-                    </div>
-                </div>
-            </div>
+  <div class="sc-title">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="title-wrapper text-center">
+            <h4>All Products</h4>
+            <h2>Mother's Day Event 2026</h2>
+            <p>
+              Mom Deserve The Best: <b>Get $20 OFF $100</b> with code <span class="pm-code">MOM20</span>,
+              <b>$50 OFF $200</b> with code <span class="pm-code">MOM50</span>, or <b>$100 OFF $300</b> with code
+              <span class="pm-code">MOM100</span>. Apply code at checkout.
+            </p>
+          </div>
         </div>
+      </div>
     </div>
-    <div class="sc-list">
-        <div class="container">
-          <div class="row amz-banner mb-5">
-              <div class="col-md-12">
+  </div>
+  <div class="sc-list">
+    <div class="container">
+      <div class="row amz-banner mb-5">
+        <div class="col-md-12">
+          {% comment %}
+            <img class="xl-banner" src="https://cdn.shopify.com/s/files/1/0268/0638/6772/files/primeday-0923.jpg?v=1695418997">
+            <img class="xs-banner" src="https://cdn.shopify.com/s/files/1/0268/0638/6772/files/xs-banner-deal.jpg?v=1695420536">
+          {% endcomment %}
+          <img
+            class="xl-banner"
+            src="https://cdn.shopify.com/s/files/1/0268/0638/6772/files/amz-xl-banner2x.jpg?v=1700652968"
+          >
+          <img
+            class="xs-banner"
+            src="https://cdn.shopify.com/s/files/1/0268/0638/6772/files/amz-xs-banner.jpg?v=1700652651"
+          >
+        </div>
+      </div>
+      <div class="row">
+        {% for product in collection.products %}
+          {% assign blurb = product.metafields.my_fields.blurb.value %}
+          <div class="col-md-6">
+            <div class="list-wrapper {% if product.tags contains 'sold-out' %}sold-out{% endif %}">
+              {% comment %}
+                {% if product.tags contains "prime" %}
+                <div class="tag-deal">Deal Available</div>
+                {% endif %}
+              {% endcomment %}
+              <div class="list-thumbnail-wrapper">
+                <img
+                  src="{{ product.featured_image | img_url: '200x' }}"
+                  alt="{{ product.featured_image.alt }}"
+                >
+              </div>
+              <div class="list-content-wrapper">
+                <h2>{{ product.title }}</h2>
+                {% if product.sku %}
+                  <div
+                    id="amzn-roa-rating"
+                    data-site-id="icia5cnbh4"
+                    data-roa-instance-id="jqzqfg7ry5lr1"
+                    data-sku="{{product.sku}}"
+                  ></div>
+                {% else %}
+                  <div
+                    id="amzn-roa-rating"
+                    data-site-id="icia5cnbh4"
+                    data-roa-instance-id="jqzqfg7ry5lr1"
+                    data-sku="{{product.selected_or_first_available_variant.sku}}"
+                  ></div>
+                {% endif %}
                 {% comment %}
-                <img class="xl-banner" src="https://cdn.shopify.com/s/files/1/0268/0638/6772/files/primeday-0923.jpg?v=1695418997">
-                <img class="xs-banner" src="https://cdn.shopify.com/s/files/1/0268/0638/6772/files/xs-banner-deal.jpg?v=1695420536">
+                  <div class="ruk_rating_snippet" data-sku="{{ product.handle }};{{ product.variants | map: 'sku' | join: ';' }};{{ product.variants | map: 'id' | join: ';' }}"></div>
                 {% endcomment %}
-                <img class="xl-banner" src="https://cdn.shopify.com/s/files/1/0268/0638/6772/files/amz-xl-banner2x.jpg?v=1700652968">
-                <img class="xs-banner" src="https://cdn.shopify.com/s/files/1/0268/0638/6772/files/amz-xs-banner.jpg?v=1700652651">
+                <span class="list-price">
+                  {% if product.price_varies %}
+                    {%- assign price = product.price_min | money -%}
+                    {{ 'products.general.from_text_html' | t: price: price }}
+                  {% else %}
+                    {{ product.price | money }}
+                  {% endif %}
+                </span>
+                <p>{{ blurb }}</p>
+                <a
+                  class="{% if product.available %} btn-view {% else %} btn-sold-out {% endif %}"
+                  href="{{ product.url }}"
+                >
+                  {%- if product.available %}
+                    {% if product.tags contains 'sold-out' %}Sold Out{% else %}View Product{% endif %}
+                  {% else %}
+                    Sold Out
+                  {% endif -%}
+                </a>
               </div>
             </div>
-            <div class="row">
-                {% for product in collection.products %}
-                {% assign blurb = product.metafields.my_fields.blurb.value %}
-                <div class="col-md-6">
-                    <div class="list-wrapper {% if product.tags contains 'sold-out' %}sold-out{% endif %}">
-                         {% comment %}
-                        {% if product.tags contains "prime" %}
-                        <div class="tag-deal">Deal Available</div>
-                        {% endif %}
-                        {% endcomment %}
-                        <div class="list-thumbnail-wrapper">
-                            <img src="{{ product.featured_image | img_url: '200x' }}"
-                                alt="{{ product.featured_image.alt }}">
-                        </div>
-                        <div class="list-content-wrapper">
-                            <h2>{{product.title }}</h2>
-                          {% if product.sku %}
-                                <div
-                                    id="amzn-roa-rating"
-                                    data-site-id="icia5cnbh4"
-                                    data-roa-instance-id="jqzqfg7ry5lr1"
-                                    data-sku="{{product.sku}}"
-                                ></div>
-                            {% else %}
-                                <div
-                                    id="amzn-roa-rating"
-                                    data-site-id="icia5cnbh4"
-                                    data-roa-instance-id="jqzqfg7ry5lr1"
-                                    data-sku="{{product.selected_or_first_available_variant.sku}}">
-                                </div>
-                            {% endif %}
-                          {% comment %}
-                            <div class="ruk_rating_snippet" data-sku="{{ product.handle }};{{ product.variants | map: 'sku' | join: ';' }};{{ product.variants | map: 'id' | join: ';' }}"></div>
-                          {% endcomment %}
-                            <span class="list-price">
-                                {% if product.price_varies %}
-                                {%- assign price = product.price_min | money -%}
-                                {{ 'products.general.from_text_html' | t: price: price }}
-                                {% else %}
-                                {{ product.price | money }}
-                                {% endif %}
-                            </span>
-                            <p>{{blurb}}</p>
-                            <a class="{% if product.available %} btn-view {% else %} btn-sold-out {% endif %}"
-                                href="{{ product.url }}">{% if product.available %}
-                                {% if product.tags contains 'sold-out' %}Sold Out{% else %}View Product{% endif %}
-                                {% else %}
-                                Sold Out
-                                {% endif %}</a>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
+          </div>
+        {% endfor %}
+      </div>
     </div>
+  </div>
 </div>

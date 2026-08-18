@@ -1,27 +1,47 @@
 /* ================= General =================*/
+.pm-code {
+    border-radius: 10px;
+    background-color: #1E7CFD;
+    padding: 3px 8px;
+    color: #fff;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.d-none {
+    display: none;
+}
+
 .col-catalog .list-wrapper.sold-out {
     opacity: 0.5;
 }
+
 .product-section.sold-out {
     pointer-events: none;
 }
+
 .product-section.sold-out .product-single__form {
     opacity: .5;
 }
-.announcement + .site-header {
+
+.announcement+.site-header {
     padding-top: 64px;
 }
-.amz-banner{
-  display:none;
+
+.amz-banner {
+    display: none;
 }
-.amz-banner img{
+
+.amz-banner img {
     width: 100%;
 }
-.amz-banner .xl-banner{
-  display:block;
+
+.amz-banner .xl-banner {
+    display: block;
 }
-.amz-banner .xs-banner{
-  display:none;
+
+.amz-banner .xs-banner {
+    display: none;
 }
 
 .product__quantity--button.js-qty input {
@@ -259,12 +279,15 @@
 
 /*================= Homepage =================*/
 .sc-banner {
-    padding-top: 82px;
-    height: 800px;
-    background-image: url('https://cdn.shopify.com/s/files/1/0268/0638/6772/files/bannerv1.jpg?v=1651268929');
+    pointer-events: all;
+    cursor: pointer;
+    padding-top: 50%;
+    height: 0;
+    background-image: url('https://cdn.shopify.com/s/files/1/0268/0638/6772/files/clf-hmd-xl_1920.webp?v=1778219073');
     background-position: center;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: contain;
+    background-color: #f3efee;
 }
 
 .sc-banner h2 {
@@ -556,7 +579,7 @@
 }
 
 .sc-video {
-    display:none;
+    display: none;
     background-color: #f4f6f8;
     padding-top: 130px;
     padding-bottom: 130px;
@@ -1439,13 +1462,15 @@
 }
 
 @media screen and (max-width: 575px) {
-    .sc-prod_review-collection h3{
+    .sc-prod_review-collection h3 {
         font-size: 32px;
     }
+
     .sc-prod_review-collection {
         padding-top: 50px;
         padding-bottom: 100px;
     }
+
     .sc-prod_list h3 {
         font-size: 32px;
     }
@@ -1606,12 +1631,12 @@
     }
 
     .cla-home {
-        margin-top: 110px !important;
+        margin-top: 123px !important;
     }
 
     .sc-banner {
-        padding-top: 20px !important;
-        height: 380px !important;
+        padding-top: 150%;
+        background-image: url('https://cdn.shopify.com/s/files/1/0268/0638/6772/files/clf-hmd-xs_800.webp?v=1778219864');
     }
 
     .sc-banner h2 {
@@ -1824,12 +1849,14 @@
 /* ================= Footer =================*/
 
 @media screen and (max-width: 576px) {
-    .amz-banner .xl-banner{
-      display:none;
+    .amz-banner .xl-banner {
+        display: none;
     }
-      .amz-banner .xs-banner{
-      display:block;
+
+    .amz-banner .xs-banner {
+        display: block;
     }
+
     .sc-footer {
         padding-bottom: 30px;
     }
