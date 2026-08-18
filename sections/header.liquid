@@ -67,7 +67,7 @@
               {% if section.settings.main_menu_alignment == 'center' or section.settings.main_menu_alignment == 'center-split' %}
                 {% if section.settings.header_search_enable %}
                   <div class="site-nav medium-down--hide">
-                    <a href="/search" class="site-nav__link site-nav__link--icon js-search-header js-no-transition">
+                    <a href="{{ routes.search_url }}" class="site-nav__link site-nav__link--icon js-search-header js-no-transition">
                       {% include 'icon-search' %}
                       <span class="icon__fallback-text">{{ 'general.search.title' | t }}</span>
                     </a>
@@ -134,6 +134,8 @@
   </div>
 </div>
 
+
+{%include 'discount-code-banner' %}
 {% schema %}
   {
     "name": "Header and menus",

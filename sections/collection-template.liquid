@@ -138,7 +138,7 @@
                 <ul class="tags tags--vertical">
                   <li{% unless current_tags %} class="tag--active"{% endunless %}>
                     {% if collection.handle %}
-                      <a href="/collections/{{ collection.handle }}">
+                      <a href="{{ routes.collections_url }}/{{ collection.handle }}">
                         {{ 'collections.general.all_of_collection' | t }}
                       </a>
                     {% elsif collection.current_type %}

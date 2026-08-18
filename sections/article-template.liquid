@@ -21,7 +21,9 @@
               {% endfor %}
             {% endif %}
             {% if section.settings.blog_show_comments and article.comments_count > 0 %}
-              <a href="#comments">{{ article.comments_count }} {{ article.comments_count | pluralize: 'comment', 'comments' }}</a> &middot;
+              <a href="#comments">
+                {{ 'blogs.comments.with_count' | t: count: article.comments_count }}
+              </a> &middot;
             {% endif %}
             {% if section.settings.blog_show_date %}
               {{ article.published_at | time_tag: format: 'month_day_year' }}

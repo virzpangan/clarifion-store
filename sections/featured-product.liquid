@@ -37,7 +37,7 @@
             {% unless product.empty? %}
               {{ product.title }}
             <div class="yotpo bottomLine"
-              data-appkey="IGYoHw43u9axnf5CUxRmujUI2852wtNrxdz3Gnya"
+              data-appkey="eS1MrLRq5OtFeYwfzT5Dk3zHkvZsdcvb8nrrmnSv"
               data-domain="{{shop.permanent_domain | escape }}"
               data-product-id="{{ product.id }}"
               data-product-models="{{ product.id }}"
@@ -46,7 +46,7 @@
               data-image-url="{{ product.featured_image | product_img_url: 'large' |replace: '?', '%3F' | replace: '&','%26'}}"
               data-description="{{ product.description | escape }}"
               data-bread-crumbs="{% for tag in product.tags %}{{ tag | escape }};{% endfor %}">
-            </div>
+          	</div>
 
             {% else %}
               {{ 'home_page.onboarding.product_title' | t }}

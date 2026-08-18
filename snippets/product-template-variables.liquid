@@ -28,9 +28,9 @@
       "priceCurrency": "{{ shop.currency }}",
       "url": "{{ shop.url }}{{ product.url }}"
     },
-    "brand": "{{ product.vendor }}",
+    "brand": {{ product.vendor | json }},
     {% if settings.sku_enable %}{% if current_variant.sku %}"sku": "{{ current_variant.sku }}",{% endif %}{% endif %}
-    "name": "{{ product.title }}",
+    "name": {{ product.title | json }},
     "description": {{ product.description | strip_html | json }},
     "category": "",
     "url": "{{ shop.url }}{{ product.url }}",
@@ -45,7 +45,7 @@
       "@type": "ImageObject",
       "url": "https:{{ product.featured_image.src | img_url: '1024x1024' }}",
       "image": "https:{{ product.featured_image.src | img_url: '1024x1024' }}",
-      "name": "{{ product.title }}",
+      "name": {{ product.title | json }},
       "width": 1024,
       "height": 1024
     }

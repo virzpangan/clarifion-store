@@ -52,7 +52,7 @@
         .logo--has-inverted is only applied to the default logo if the inverted logo exists. That way it'll only be hidden on the slider when it has a backup.
       {% endcomment %}
       <a
-        href="/"
+        href="{{ routes.root_url }}"
         itemprop="url"
         class="site-header__logo-link{% if block.settings.logo-inverted %} logo--has-inverted{% endif %}">
         <img
@@ -69,7 +69,7 @@
       </a>
       {% if block.settings.logo-inverted %}
         <a
-          href="/"
+          href="{{ routes.root_url }}"
           itemprop="url"
           class="site-header__logo-link logo--inverted">
           <img
@@ -86,7 +86,7 @@
         </a>
       {% endif %}
     {% else %}
-      <a href="/" itemprop="url">{{ shop.name }}</a>
+      <a href="{{ routes.root_url }}" itemprop="url">{{ shop.name }}</a>
     {% endif %}
     {% if template == 'index' %}
       </h1>
@@ -103,7 +103,7 @@
   {% else %}
     <div class="h1 site-header__logo" itemscope itemtype="http://schema.org/Organization">
   {% endif %}
-  <a href="/" itemprop="url" class="site-header__logo-link">
+  <a href="{{ routes.root_url }}" itemprop="url" class="site-header__logo-link">
     {{ shop.name }}
   </a>
   {% if template == 'index' %}

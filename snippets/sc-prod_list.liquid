@@ -1,0 +1,89 @@
+<div class="sc-prod_list">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="title-wrapper text-center">
+                    <h3>You might also like…</h3>
+                    <p>Leaders in clean-air innovation</p>
+                </div>
+            </div>
+        </div>
+        {% if content.suggestion != blank %}
+        <div class="row">
+            {% assign cnt = 1 %}
+            {% for item_product in collections.all.products %}
+            {% if content.suggestion.id contains item_product.id %}
+            {% capture cnt %} {% increment cnt %} {% endcapture %}
+            {% assign int_cnt = cnt | plus: 0 %}
+            {% if  int_cnt < 3 %}  
+            <div class="col-md-4">
+                <figure>
+                    <span class="tag"></span>
+                    <img src="{{ item_product.featured_image | img_url: '200x' }}"
+                        alt="{{ item_product.featured_image.alt }}">
+                    <figcaption>{{ item_product.title }}</figcaption>
+                    <div class="ruk_rating_snippet"
+                        data-sku="{{ item_product.handle }};{{ item_product.variants | map: 'sku' | join: ';' }};{{ item_product.variants | map: 'id' | join: ';' }}">
+                    </div>
+                    <ul class="price">
+                        {% if item_product.price_varies %}
+                        {%- assign price = item_product.price_min | money -%}
+                        <li class="sale">{{ 'products.general.from_text_html' | t: price: price }}</li>
+                        {% else %}
+                        <li class="sale">{{ item_product.price | money }}</li>
+                        {% endif %}
+                    </ul>
+                    <a href="{{ item_product.url }}">
+                        {% if item_product.available %}
+                        Shop
+                        {% else %}
+                        Sold Out
+                        {% endif %}
+                    </a>
+                </figure>
+            </div>
+            {% endif %}
+            {% endif %}
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="row">
+            {% assign cnt = 1 %}
+            {% for item_product in collections.all.products %}
+            {% if product.id != item_product.id %}
+            {% capture cnt %} {% increment cnt %} {% endcapture %}
+            {% assign int_cnt = cnt | plus: 0 %}
+            {% if  int_cnt < 3 %}  
+            <div class="col-md-4">
+                <figure>
+                    <span class="tag"></span>
+                    <img src="{{ item_product.featured_image | img_url: '200x' }}"
+                        alt="{{ item_product.featured_image.alt }}">
+                    <figcaption>{{ item_product.title }}</figcaption>
+                    <div class="ruk_rating_snippet"
+                        data-sku="{{ item_product.handle }};{{ item_product.variants | map: 'sku' | join: ';' }};{{ item_product.variants | map: 'id' | join: ';' }}">
+                    </div>
+                    <ul class="price">
+                        {% if item_product.price_varies %}
+                        {%- assign price = item_product.price_min | money -%}
+                        <li class="sale">{{ 'products.general.from_text_html' | t: price: price }}</li>
+                        {% else %}
+                        <li class="sale">{{ item_product.price | money }}</li>
+                        {% endif %}
+                    </ul>
+                    <a href="{{ item_product.url }}">
+                        {% if item_product.available %}
+                        Shop
+                        {% else %}
+                        Sold Out
+                        {% endif %}
+                    </a>
+                </figure>
+            </div>
+            {% endif %}
+            {% endif %}
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</div>

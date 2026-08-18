@@ -1,16 +1,19 @@
-<div class="announcement{% if section.settings.announcement_closable %} announcement--closeable announcement--closed{% endif %}">
+<div style="background-color:#143075" class="announcement{% if section.settings.announcement_closable %} announcement--closeable announcement--closed{% endif %}">
+
   {% if section.settings.announcement_link != blank %}
-    <a href="{{ section.settings.announcement_link }}" class="announcement__link">
+ <a href="{{ section.settings.announcement_link }}" class="announcement__link"> 
   {% endif %}
 
     <span class="announcement__text{% unless sections.settings.announcement_closable %} announcement__text--open{% endunless %}" data-text="{{ section.settings.announcement_text | strip_html | handle }}">
-      {{ section.settings.announcement_text | strip_html }}
+     {{ section.settings.announcement_text | strip_html }}
+{% comment %} Holiday Deals are here. <a style="color:#fff!important;" href="./collections/all/">Shop now</a> {% endcomment %}
     </span>
 
   {% if section.settings.announcement_link != blank %}
-    </a>
+  </a> 
   {% endif %}
 
+  
   {% if section.settings.announcement_closable %}
     <button type="button" class="text-link announcement__close">
       {% include 'icon-close' %}

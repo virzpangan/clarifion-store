@@ -67,9 +67,48 @@
         <label for="ProductSelect-{{ section_id }}-option-{{ option.name | handleize }}-{{ value | url_encode }}"{% unless variant_label_state %} class="disabled"{% endunless %}>
           
          {{ value | escape }}
-           {% if forloop.last == false%}
-               <span class="savepercentage">Save {{forloop.index | times: 5}}%</span>
-           {% endif %}
+       
+  
+          
+    {% if product.id != 4801495760980 %}
+         {% if forloop.index == 2 %}
+            {% for variant in product.variants %}
+          		{% if forloop.index == 2 %}
+              		<span class="savepercentage">Save {{ variant.compare_at_price | minus: variant.price | money}}
+            	{% endif %}
+             {% endfor %}
+         {% endif %}
+         {% if forloop.index == 3 %}
+            {% for variant in product.variants %}
+          		{% if forloop.index == 3 %}
+              		<span class="savepercentage">Save {{ variant.compare_at_price | minus: variant.price | money}}
+            	{% endif %}
+             {% endfor %}
+         {% endif %}
+         {% if forloop.index == 4 %}
+            {% for variant in product.variants %}
+          		{% if forloop.index == 4 %}
+              		<span class="savepercentage">Save {{ variant.compare_at_price | minus: variant.price | money}}
+            	{% endif %}
+             {% endfor %}
+         {% endif %}
+         {% if forloop.index == 5 %}
+            {% for variant in product.variants %}
+          		{% if forloop.index == 5 %}
+              		<span class="savepercentage">Save {{ variant.compare_at_price | minus: variant.price | money}}
+            	{% endif %}
+             {% endfor %}
+         {% endif %}
+                      
+    {% else %}
+                
+       {% if forloop.first == false%}
+
+               <span class="savepercentage">Save {{forloop.index | minus: 1 | times: 5}}%</span>
+          {% endif %}
+          
+    {% endif %}
+          
     </label>
       {% endif %}
     {% endfor %}

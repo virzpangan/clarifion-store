@@ -1,0 +1,113 @@
+<style>
+    .savepercentage {
+        display: none;
+    }
+
+    #discount-message {
+        width: 100%;
+        position: fixed;
+        background: #ffea8a;
+        bottom: 0;
+        z-index: 100;
+    }
+
+    .show-discount {
+        text-align: center;
+        font-weight: 600;
+        font-size: .94118em;
+        letter-spacing: 1px;
+        padding: 14px;
+        color: #111111;
+    }
+
+    .show-discount button {
+        font-weight: 600;
+        position: absolute;
+        right: 20px;
+        font-size: 20px;
+        top: 8px;
+    }
+
+    .show-discount span {
+        background-color: hsla(0, 0%, 44.3%, .2);
+        padding: 5px 8px;
+        border-radius: 5px;
+    }
+
+    @media screen and (max-width: 768px) {
+        .show-discount {
+            margin: auto;
+            max-width: 320px;
+            font-size: 13px;
+        }
+    }
+</style>
+
+<div id="discount-message"></div>
+
+<script type="text/javascript">
+    var codeCookieValue;
+    var getCookie = function (name) {
+        var value = "; " + document.cookie;
+        var parts = value.split('; ' + name + '=');
+        if (parts.length == 2) return parts.pop().split(";").shift();
+    };
+    codeCookieValue = getCookie('discount_code');
+    if (!codeCookieValue) {
+        console.log("No Discount Code");
+    }
+
+    if (codeCookieValue == "TEXT15") {
+        console.log("Discount Code - " + codeCookieValue);
+        document.getElementById("discount-message").innerHTML = "<div class='show-discount'>Your 15% Off Free Gift Will Automatically Apply at Checkout</div>";
+
+    }
+
+    if (codeCookieValue == "B371RYA6192X") {
+        console.log("Discount Code - " + codeCookieValue);
+        document.getElementById("discount-message").innerHTML = "<div class='show-discount'><span>B371RYA6192X</span> Your 50% Off Discount Code has been Applied <button>x</button</div>";
+
+        const btnClose = document.querySelector('#discount-message button');
+        btnClose.addEventListener('click', () => {
+            const discountWrapper = document.querySelector('#discount-message');
+            discountWrapper.style.display = 'none';
+
+        });
+
+
+        window.addEventListener('DOMContentLoaded', () => {
+            {% if product.id != blank %}
+            updatePrice();
+            const lblVar = document.querySelectorAll('fieldset label');
+            lblVar.forEach((item) => {
+                item.addEventListener('click', () => {
+                    setTimeout(() => {
+                        updatePrice();
+                    }, 100);
+                });
+            });
+            {% endif %}
+
+            const listprice = document.querySelectorAll('.list-price');
+            listprice.forEach((item, index) => {
+                if (index < listprice.length - 1) {
+                    const txtPrice = item.innerHTML;
+                    const price = parseFloat(Number(txtPrice.replace(/[^0-9\.]+/g, "")));
+                    item.innerHTML = `<span style="text-decoration: line-through;">${price}</span> from $${(price / 2).toFixed(2)}`;
+                }
+            });
+        });
+
+
+    }
+
+    function updatePrice() {
+        const onSale = document.querySelector('.on-sale');
+        const comprice = document.querySelector('.product__price--compare');
+        const txtPrice = onSale.innerHTML;
+        comprice.innerHTML = txtPrice;
+        const price = parseFloat(Number(txtPrice.replace(/[^0-9\.]+/g, "")));
+        onSale.innerHTML = `$${(price / 2).toFixed(2)}`;
+    }
+
+</script>

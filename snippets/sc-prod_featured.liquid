@@ -1,0 +1,46 @@
+{% if content.featured != blank %}
+<div class="sc-prod_featured">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="wrapper">
+                    <h2>{{ content.featured.title }}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row oval-bg">
+            <div class="col-md-12 col-lg-4 col-hide d-flex align-items-center">
+                <ul class="list-left">
+                    {% for item in content.featured.list_left %}
+                    <li>{{ item }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-md-12 col-lg-4 text-center">
+                <img src="{{ content.featured.image }}" alt="">
+            </div>
+            <div class="col-md-12 col-lg-4 col-hide d-flex align-items-center">
+                <ul class="list-right">
+                    {% for item in content.featured.list_right %}
+                    <li>{{ item }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-sm-6 col-md-6 col-show d-flex align-items-center">
+                <ul class="list-left">
+                    {% for item in content.featured.list_left %}
+                    <li>{{ item }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-sm-6 col-md-6 col-show d-flex align-items-center">
+                <ul class="list-right">
+                    {% for item in content.featured.list_right %}
+                    <li>{{ item }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}

@@ -1,4 +1,3 @@
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <footer class="site-footer">
   <div class="page-width">
 
@@ -58,7 +57,10 @@
         </ul>
       {% endunless %}
     {% endif %}
-
+    <ul class="flink-2">
+      <li><button onclick="GorgiasChat.open();">Live Chat</button></li>
+      <li><button onclick="getCollabButton();">Join our Influencer Program!</button></li>
+    </ul>
     {% if section.settings.show_copyright %}
       <p class="footer__copyright">
         &copy; {{ 'now' | date: '%Y' }} {{ shop.name }}
@@ -70,25 +72,6 @@
 
   </div>
 </footer>
-
-  <script>
-  var getUrlParameter = function getUrlParameter(sParam) {
-    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
-        sURLVariables = sPageURL.split('&'),
-        sParameterName,
-        i;
-    for (i = 0; i < sURLVariables.length; i++) {
-        sParameterName = sURLVariables[i].split('=');
-        if (sParameterName[0] === sParam) {
-            return sParameterName[1] === undefined ? true : sParameterName[1];
-        }
-    }
-  };
-  var ref = getUrlParameter('ref');
-  if(ref && ref.length > 0) {
-    jQuery.post('/cart/update.js', {note: ref});
-  }
-</script>
 
 {% schema %}
   {

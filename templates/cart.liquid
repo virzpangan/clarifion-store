@@ -74,7 +74,7 @@
                       {% endif %}
 
                       <p class="cart__product-meta small--hide">
-                        <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0" class="btn btn--tertiary btn--small">
+                        <a href="{{ routes.cart_change_url }}?line={{ forloop.index }}&amp;quantity=0" class="btn btn--tertiary btn--small">
                           {{ 'cart.general.remove' | t }}
                         </a>
                       </p>
@@ -94,7 +94,7 @@
                     </div>
 
                     <div class="grid__item one-third text-center medium-up--hide">
-                      <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0" class="btn btn--no-animate btn--small">
+                      <a href="{{ routes.cart_change_url }}?line={{ forloop.index }}&amp;quantity=0" class="btn btn--no-animate btn--small">
                         <small>{{ 'cart.general.remove' | t }}</small>
                       </a>
                     </div>
@@ -121,7 +121,7 @@
               </div>
             </div>
           {% endfor %}
-
+	
           <div class="cart__row">
             <div class="grid">
               {% if settings.cart_notes_enable %}
@@ -177,16 +177,19 @@
                   </p>
                 {% endif %}
 
-                {% if additional_checkout_buttons and settings.cart_additional_buttons %}
-                  <div class="additional_checkout_buttons">{{ content_for_additional_checkout_buttons }}</div>
-                {% endif %}
+                <div class="cart__checkout-wrapper">
+                  <button type="submit" name="update" class="btn btn--no-animate cart__update">
+                    {{ 'cart.general.update' | t }}
+                  </button>
+                  <button type="submit" name="checkout" class="btn btn--no-animate cart__checkout{% if settings.cart_terms_conditions_enable %} cart__checkout--page{% endif %}">
+                    {{ 'cart.general.checkout' | t }}
+                  </button>
 
-                <button type="submit" name="update" class="btn btn--no-animate cart__update">
-                  {{ 'cart.general.update' | t }}
-                </button>
-                <button type="submit" name="checkout" class="btn btn--no-animate cart__checkout{% if settings.cart_terms_conditions_enable %} cart__checkout--page{% endif %}">
-                  {{ 'cart.general.checkout' | t }}
-                </button>
+                  {% if additional_checkout_buttons and settings.cart_additional_buttons %}
+                    <div class="additional_checkout_buttons">{{ content_for_additional_checkout_buttons }}</div>
+                  {% endif %}
+                </div>
+
               </div>
             </div>
 
@@ -204,6 +207,33 @@
     </div>
   </div>
 </div>
+<script>
+    const terms = document.querySelector('.ajaxcart__note--terms label');
+    terms.innerHTML = 'I agree with the <a href="../policies/terms-of-service">Terms of Use</a> and <a href="../policies/privacy-policy">Privacy Policy</a> ';
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    //Set Order Attributes
+    $.getJSON('/cart.js', function (cart) {
+        const default_attr = cart.attributes;
+        if (!default_attr.utm_campaign) {
+            const utm_params = JSON.parse(localStorage.getItem('utm_params'));
+            data = {
+                'customerlabs_id': `${default_attr.customerlabs_id}`,
+                'utm_campaign': `${utm_params.utm_campaign}`,
+                'utm_content': `${utm_params.utm_content}`,
+                'utm_medium': `${utm_params.utm_medium}`,
+                'utm_source': `${utm_params.utm_source}`,
+                'utm_term': `${utm_params.utm_term}`
+            }
+            jQuery.ajax({
+                type: 'POST',
+                url: '/cart/update.js',
+                data: { attributes: data },
+                dataType: 'json'
+            });
+        }
+    });
+</script>
 
-
-<script src="https://widget.sezzle.com/v1/javascript/price-widget?uuid=151a52cf-0d0a-4de1-b10a-cebb8fab81c9"></script>
+<script src="https://widget.sezzle.com/v1/javascript/price-widget?uuid=89debe2a-d36a-44fb-a5ff-94eeadb63aa9"></script>

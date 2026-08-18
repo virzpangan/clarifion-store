@@ -12,13 +12,13 @@
     "color_body_bg": "#ffffff",
     "color_body_text": "#000000",
     "color_borders": "#e8e8e1",
-    "color_button": "#111111",
-    "color_button_text": "#fff",
+    "color_button": "#2c7ef8",
+    "color_button_text": "#ffffff",
     "color_cart_dot": "#ff4f33",
     "color_header": "#fff",
     "color_header_text": "#000",
-    "color_announcement": "#1c1d1d",
-    "color_announcement_text": "#fff",
+    "color_announcement": "#e3e8ee",
+    "color_announcement_text": "#001c71",
     "color_footer": "#ebeef3",
     "color_footer_text": "#000000",
     "color_drawer_background": "#ffffff",
@@ -40,7 +40,7 @@
     "type_header_line_height": 1.2,
     "type_header_accent_transform": true,
     "type_headers_align_text": false,
-    "type_base_font_family": "futura_n4",
+    "type_base_font_family": "montserrat_n4",
     "type_base_spacing": "25",
     "type_base_size": 17,
     "type_base_line_height": 1.6,
@@ -58,19 +58,19 @@
     "animate_underlines": true,
     "vendor_enable": false,
     "sku_enable": false,
-    "quantity_enable": false,
+    "quantity_enable": true,
     "variant_labels_enable": true,
     "variant_type": "button",
     "enable_payment_button": true,
     "inventory_enable": false,
     "product_save_amount": false,
     "product_save_type": "dollar",
-    "product_zoom_enable": false,
-    "quick_shop_enable": true,
+    "product_zoom_enable": true,
+    "quick_shop_enable": false,
     "quick_shop_text": "Quick view",
     "product_hover_image": false,
     "product_grid_image_size": "natural",
-    "product_color_swatches": true,
+    "product_color_swatches": false,
     "collection_color_swatches": false,
     "product_video_width": "1280",
     "product_video_height": "720",
@@ -83,11 +83,11 @@
     "product_contact_show_phone": false,
     "enable_product_reviews": false,
     "reviews_layout": "expandable",
-    "cart_type": "drawer",
-    "cart_additional_buttons": true,
+    "cart_type": "page",
+    "cart_additional_buttons": false,
     "cart_notes_enable": false,
-    "cart_terms_conditions_enable": false,
-    "cart_terms_conditions_link": "",
+    "cart_terms_conditions_enable": true,
+    "cart_terms_conditions_link": "shopify://policies/terms-of-service",
     "enable_currencies": false,
     "currency_format": "money_format",
     "supported_currencies": "USD CAD INR GBP AUD EUR JPY",
@@ -101,9 +101,9 @@
     "social_linkedin_link": "",
     "social_youtube_link": "",
     "social_vimeo_link": "",
-    "share_facebook": true,
-    "share_twitter": true,
-    "share_pinterest": true,
+    "share_facebook": false,
+    "share_twitter": false,
+    "share_pinterest": false,
     "homepage_social_image": "",
     "favicon": "shopify://shop_images/airfav.png",
     "show_breadcrumbs": false,
@@ -120,7 +120,7 @@
     "checkout_heading_font": "Helvetica Neue",
     "checkout_body_font": "Helvetica Neue",
     "checkout_accent_color": "#111111",
-    "checkout_button_color": "#12b329",
+    "checkout_button_color": "#34c830",
     "checkout_error_color": "#ff6d6d",
     "color_image_bg": "#000000",
     "breadcrumb": true,
@@ -133,22 +133,21 @@
       "header": {
         "type": "header",
         "blocks": {
-          "1563240758903": {
+          "1565831068835": {
             "type": "logo",
             "settings": {
-              "logo": "shopify://shop_images/clarifion_logo.png",
-              "logo-inverted": "",
+              "logo": "shopify://shop_images/clarifion-logoblue.png",
               "desktop_logo_width": 200,
-              "mobile_logo_width": 100
+              "mobile_logo_width": 140
             }
           }
         },
         "block_order": [
-          "1563240758903"
+          "1565831068835"
         ],
         "settings": {
           "main_menu_link_list": "main-menu",
-          "main_menu_alignment": "left",
+          "main_menu_alignment": "center-left",
           "header_style": "normal",
           "sticky_index": true,
           "sticky_collection": false,
@@ -156,9 +155,9 @@
           "type_navigation_size": 18,
           "type_navigation_style": false,
           "show_announcement": true,
-          "announcement_text": "Free Shipping on Orders Over $50",
-          "announcement_link": "shopify://collections/all",
-          "announcement_closable": true
+          "announcement_text": "Orders Over $50 Receive Free Shipping",
+          "announcement_link": "shopify://collections",
+          "announcement_closable": false
         }
       },
       "footer": {
@@ -167,9 +166,9 @@
           "1494292481350": {
             "type": "logo_social",
             "settings": {
-              "logo": "shopify://shop_images/clarifion-footer-logo.jpg",
-              "desktop_logo_height": 100,
-              "container_width": 27
+              "logo": "shopify://shop_images/clarifion-logoblue.png",
+              "desktop_logo_height": 54,
+              "container_width": 20
             }
           },
           "1494301487049": {
@@ -180,12 +179,12 @@
               "container_width": 20
             }
           },
-          "1563244689696": {
+          "1566003889542": {
             "type": "custom",
             "settings": {
-              "show_footer_title": true,
-              "title": "Contact Us",
-              "text": "<p>support@clarifion.com</p>",
+              "show_footer_title": false,
+              "title": "",
+              "text": "",
               "container_width": 20
             }
           }
@@ -193,10 +192,10 @@
         "block_order": [
           "1494292481350",
           "1494301487049",
-          "1563244689696"
+          "1566003889542"
         ],
         "settings": {
-          "show_payment_icons": true,
+          "show_payment_icons": false,
           "show_copyright": true,
           "copyright_text": ""
         }
@@ -215,7 +214,7 @@
         "type": "product-template",
         "settings": {
           "image_size": "medium",
-          "thumbnail_position": "beside",
+          "thumbnail_position": "below",
           "description_style": "default",
           "social_enable": true
         }
@@ -240,21 +239,6 @@
           "blog_show_date": true,
           "blog_show_comments": true,
           "blog_show_author": false
-        }
-      },
-      "1499790633921": {
-        "type": "background-image-text",
-        "settings": {
-          "subtitle": "Have any questions?",
-          "title": "We Are Here to Help",
-          "text": "<p>We're certain you'll love Clarifion products but if you have any questions or concerns, feel free to reach out to us.</p>",
-          "button_label": "Contact Us",
-          "button_link": "shopify://pages/contact-us",
-          "image": "shopify://shop_images/pattern1-01.jpg",
-          "alignment": "center",
-          "color_border": "#f4f4f4",
-          "layout": "left",
-          "height": 650
         }
       },
       "product-sections-template": {
@@ -466,7 +450,6 @@
           "popup_seconds": 5,
           "popup_days": 30,
           "popup_title": "Sign up and save",
-          "popup_image": "",
           "popup_text": "<p>Entice customers to sign up for your mailing list with discounts or exclusive offers. Include an image for extra impact.</p>",
           "close_text": "No thanks",
           "enable_newsletter": true,
@@ -475,20 +458,11 @@
           "enable_button": false
         }
       },
-      "1563240047219": {
-        "type": "featured-product",
-        "settings": {
-          "featured_product": "clarifion",
-          "thumbnail_position": "below",
-          "show_description": true,
-          "divider": false
-        }
-      },
-      "1563240082319": {
+      "1565832383199": {
         "type": "background-video-text",
         "settings": {
           "subtitle": "",
-          "title": "Thrilled Customers",
+          "title": "Customer Reviews",
           "text": "<p>People &hearts; Clarifion. Here is what people are saying about Clarifion:</p>",
           "button_label": "",
           "button_link": "",
@@ -498,38 +472,38 @@
           "height": 550
         }
       },
-      "1563240102258": {
+      "1565832455657": {
         "type": "testimonials",
         "blocks": {
-          "1563240102258-0": {
+          "1565832455657-0": {
             "type": "testimonial",
             "settings": {
               "testimonial": "<p>So easy to use! I love that I can plug it in and forget about it. No filters or maintenance. The product is small and discreet so I have them plugged in all over my house.</p>",
               "image": "",
-              "author": "Adam H."
+              "author": "Heather N."
             }
           },
-          "1563240102258-1": {
+          "1565832455657-1": {
             "type": "testimonial",
             "settings": {
               "testimonial": "<p>I bought the three pack and have really noticed a difference in the air quality. The air seems to smell fresher and our allergies don&rsquo;t seem as bad. Now I have to order more to cover more rooms.</p>",
               "image": "",
-              "author": "Jose V."
+              "author": "Abel H."
             }
           },
-          "1563240102258-2": {
+          "1565832455657-2": {
             "type": "testimonial",
             "settings": {
               "testimonial": "<p>Awesome!!! Very happy with results almost immediately! No more dog smell and cleaner air!</p>",
               "image": "",
-              "author": "Robert S."
+              "author": "Jane W."
             }
           }
         },
         "block_order": [
-          "1563240102258-0",
-          "1563240102258-1",
-          "1563240102258-2"
+          "1565832455657-0",
+          "1565832455657-1",
+          "1565832455657-2"
         ],
         "settings": {
           "title": "Testimonials",
@@ -538,7 +512,22 @@
           "divider": false
         }
       },
-      "1563240209204": {
+      "1565832980238": {
+        "type": "background-image-text",
+        "settings": {
+          "subtitle": "Have any questions?",
+          "title": "We Are Here to Help",
+          "text": "<p>We're certain you'll love Clarifion products but if you have any questions or concerns, feel free to reach out to us.</p>",
+          "button_label": "Contact Us",
+          "button_link": "shopify://pages/contact-us",
+          "image": "shopify://shop_images/pattern1-01.jpg",
+          "alignment": "center",
+          "color_border": "#2a7de1",
+          "layout": "left",
+          "height": 550
+        }
+      },
+      "1565833080904": {
         "type": "newsletter",
         "settings": {
           "title": "Join Our VIP Club",
@@ -547,10 +536,19 @@
           "color_text": "#ffffff"
         }
       },
+      "1565834400324": {
+        "type": "featured-product",
+        "settings": {
+          "featured_product": "clarifion",
+          "thumbnail_position": "beside",
+          "show_description": true,
+          "divider": false
+        }
+      },
       "product-recommendations": {
         "type": "product-recommendations",
         "settings": {
-          "show_product_recommendations": true,
+          "show_product_recommendations": false,
           "product_recommendations_heading": "You may also like",
           "related_count": 5
         }
@@ -558,13 +556,13 @@
       "product-collection-links": {
         "type": "product-collection-links",
         "settings": {
-          "collection_links_enable": true
+          "collection_links_enable": false
         }
       },
-      "1602267548043": {
+      "1584590862292": {
         "type": "slideshow",
         "blocks": {
-          "1602267548043-0": {
+          "1584590862292-0": {
             "type": "image",
             "settings": {
               "title": "The Easy to Install Home Air Ionizer",
@@ -579,7 +577,7 @@
           }
         },
         "block_order": [
-          "1602267548043-0"
+          "1584590862292-0"
         ],
         "settings": {
           "section_height": "650px",
@@ -588,16 +586,67 @@
           "autoplay": true,
           "autoplay_speed": 5
         }
+      },
+      "custom-section-0523": {
+        "type": "custom-section-0523",
+        "settings": {}
       }
     },
     "content_for_index": [
-      "1602267548043",
-      "1563240047219",
-      "1563240082319",
-      "1563240102258",
-      "1499790633921",
-      "1563240209204"
-    ]
+      "1584590862292",
+      "1565834400324",
+      "1565832383199",
+      "1565832455657",
+      "1565832980238",
+      "1565833080904"
+    ],
+    "blocks": {
+      "432548863483948295": {
+        "type": "shopify://apps/show-discounts-everywhere/blocks/app-embed/0a6ac9ec-5b60-48b7-83d6-3144cdd01c59",
+        "disabled": true,
+        "settings": {}
+      },
+      "10830403595879607806": {
+        "type": "shopify://apps/reviews-io/blocks/reviewsio-core/92a082e5-b297-4e88-b428-ac96cbc505f9",
+        "disabled": false,
+        "settings": {
+          "url_key": "clarifion",
+          "lang": "auto"
+        }
+      },
+      "15316669992541710076": {
+        "type": "shopify://apps/reviews-io/blocks/reviewsio-rating-snippet/92a082e5-b297-4e88-b428-ac96cbc505f9",
+        "disabled": false,
+        "settings": {
+          "star": "#000",
+          "text_color": "#333",
+          "snippet_mode": "default",
+          "text": "Reviews",
+          "line_break": false,
+          "listen_for_changes": false,
+          "rating_without_brackets": false,
+          "format_review_count": true,
+          "show_popup": false,
+          "anchor_to_reviews_widget": false,
+          "show_empty_stars": false
+        }
+      },
+      "17428600031447253342": {
+        "type": "shopify://apps/attentive/blocks/attn-tag/8df62c72-8fe4-407e-a5b3-72132be30a0d",
+        "disabled": false,
+        "settings": {}
+      },
+      "11247749996023160269": {
+        "type": "shopify://apps/952a5e79-opensend/blocks/opensend/b889318b-3248-4b8a-883c-85b7150ac2ee",
+        "disabled": false,
+        "settings": {}
+      },
+      "17676059084223943535": {
+        "type": "shopify://apps/triplewhale/blocks/triple_pixel_snippet/483d496b-3f1a-4609-aea7-8eee3b6b7a2a",
+        "disabled": false,
+        "settings": {}
+      }
+    }
   },
   "presets": {
     "Classic": {
@@ -641,7 +690,7 @@
       "animate_buttons": true,
       "animate_underlines": true,
       "quick_shop_text": "Quick view",
-      "cart_type": "drawer",
+      "cart_type": "page",
       "currency_format": "money_format",
       "supported_currencies": "USD CAD INR GBP AUD EUR JPY",
       "default_currency": "USD",
@@ -1081,7 +1130,7 @@
       "animate_buttons": true,
       "animate_underlines": true,
       "quick_shop_text": "Quick view",
-      "cart_type": "drawer",
+      "cart_type": "page",
       "currency_format": "money_format",
       "supported_currencies": "USD CAD INR GBP AUD EUR JPY",
       "default_currency": "USD",
@@ -1449,7 +1498,7 @@
       "animate_buttons": true,
       "animate_underlines": true,
       "quick_shop_text": "Quick view",
-      "cart_type": "drawer",
+      "cart_type": "page",
       "currency_format": "money_format",
       "supported_currencies": "USD CAD INR GBP AUD EUR JPY",
       "default_currency": "USD",
