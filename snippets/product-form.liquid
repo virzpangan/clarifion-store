@@ -1,9 +1,16 @@
+{%- assign current_variant = product.variants[1] -%}
+
+{%- if current_variant == blank or current_variant.available == false -%}
+  {%- assign current_variant = product.selected_or_first_available_variant -%}
+{%- endif -%}
+
 {% capture form_id %}AddToCartForm-{{ section_id }}{% endcapture %}
+
 {% form 'product', product, data-productid: product.id, id: form_id, class: 'product-single__form' %}
   {% unless product.options.size == 1 and product.variants[0].title == 'Default Title' %}
     {% for option in product.options_with_values %}
       {% if settings.variant_type == 'button' %}
-        {% include 'variant-button', section_id: section_id, option_drop: option %}
+        {% include 'variant-button', section_id: section_id, option_drop: option, current_variant: current_variant %}
       {% else %}
         {% include 'variant-dropdown', section_id: section_id %}
       {% endif %}
@@ -13,9 +20,10 @@
   <select name="id" data-productid="{{ product.id }}" id="ProductSelect-{{ section_id }}" class="product-single__variants no-js">
     {% for variant in product.variants %}
       {% if variant.available %}
-        <option {% if variant == product.selected_or_first_available_variant %}
-          selected="selected" {% endif %}
-          value="{{ variant.id }}">
+        <option
+          {% if variant.id == current_variant.id %} selected="selected"{% endif %}
+          value="{{ variant.id }}"
+        >
           {{ variant.title }} - {{ variant.price | money_with_currency }}
         </option>
       {% else %}
@@ -29,18 +37,26 @@
   {% if settings.quantity_enable %}
     <div class="product__quantity product__quantity--{{ settings.variant_type }} js-qty">
       <label for="Quantity-{{ section_id }}">{{ 'products.product.quantity' | t }}</label>
-      <input type="number" hidden="hidden" id="Quantity-{{ section_id }}" name="quantity" value="1" min="1" class="js-qty__fallback">
+      <input
+        type="number"
+        hidden="hidden"
+        id="Quantity-{{ section_id }}"
+        name="quantity"
+        value="1"
+        min="1"
+        class="js-qty__fallback"
+      >
     </div>
   {% endif %}
 
   {%- assign enable_dynamic_buttons = false -%}
+
   {% if settings.enable_payment_button and template != 'product.preorder' %}
     {%- assign enable_dynamic_buttons = true -%}
   {% endif %}
 
   {% if enable_dynamic_buttons %}
     <div class="payment-buttons">
-      
   {% endif %}
 
     <button
@@ -48,15 +64,22 @@
       name="add"
       id="AddToCart-{{ section_id }}"
       class="{% if enable_dynamic_buttons %}btn--tertiary{% else %}btn{% endif %} btn--full btn--no-animate add-to-cart"
-            
-      {% unless current_variant.available %} disabled="disabled"{% endunless %}>
-      <span style="background-image: url('https://cdn.shopify.com/s/files/1/0062/5793/4454/files/cart-2x.png');width: 35px;height: 35px;display: block;position: absolute;top: 6px;left: 5px;background-size: 35px 35px;"></span>
+      {% unless current_variant.available %} disabled="disabled"{% endunless %}
+    >
+      <span
+        style="background-image: url('https://cdn.shopify.com/s/files/1/0062/5793/4454/files/cart-2x.png');width: 35px;height: 35px;display: block;position: absolute;top: 6px;left: 5px;background-size: 35px 35px;"
+      ></span>
+
       <span id="AddToCartText-{{ section_id }}">
         {% if current_variant.available %}
           {% if template == 'product.preorder' %}
             {{ 'products.product.preorder' | t }}
           {% else %}
-            {% if product.tags contains 'sold-out' %}SOLD OUT{% else %} {{ 'products.product.add_to_cart' | t }} {% endif %}
+            {% if product.tags contains 'sold-out' %}
+              SOLD OUT
+            {% else %}
+              {{ 'products.product.add_to_cart' | t }}
+            {% endif %}
           {% endif %}
         {% else %}
           {{ 'products.product.sold_out' | t }}
@@ -64,162 +87,154 @@
       </span>
     </button>
 
-      <!-- Beginning of Buy With Prime Widget -->
-  <script defer src='https://code.buywithprime.amazon.com/default.variant.selector.shopify.js'></script>
-  <script async fetchpriority='high' src='https://code.buywithprime.amazon.com/bwp.v1.js'></script>
-  {% if product.sku %}
-      <div
-          id="amzn-buy-now"
-          data-site-id="icia5cnbh4"
-          data-widget-id="w-qzWCfB8lAd2DcEj8uKu552"
-          data-sku="{{product.sku}}"
-      ></div>
-  {% else %}
-      <div
-          id="amzn-buy-now"
-          data-site-id="2iom9jxkii"
-          data-widget-id="w-qzWCfB8lAd2DcEj8uKu552"
-          data-sku="{{product.selected_or_first_available_variant.sku}}"
-      ></div>
-  {% endif %}
+    <!-- Beginning of Buy With Prime Widget -->
+    <script defer src="https://code.buywithprime.amazon.com/default.variant.selector.shopify.js"></script>
+    <script async fetchpriority="high" src="https://code.buywithprime.amazon.com/bwp.v1.js"></script>
 
-<style>
-    .bwp-widget-and-separator-container {
+    {% if product.sku %}
+      <div
+        id="amzn-buy-now"
+        data-site-id="icia5cnbh4"
+        data-widget-id="w-qzWCfB8lAd2DcEj8uKu552"
+        data-sku="{{ product.sku }}"
+      ></div>
+    {% else %}
+      <div
+        id="amzn-buy-now"
+        data-site-id="2iom9jxkii"
+        data-widget-id="w-qzWCfB8lAd2DcEj8uKu552"
+        data-sku="{{ current_variant.sku }}"
+      ></div>
+    {% endif %}
+
+    <style>
+      .bwp-widget-and-separator-container {
         display: flex;
         flex-direction: column-reverse;
-    }
-    .or-separator {
+      }
+
+      .or-separator {
         text-align: center;
         display: none;
-    }
-   .bwp-widget-loaded ~ .or-separator {
-      display: flex;
-      align-items: center;
-      text-align: center;
-      margin-top:6px;
-    }
-   .bwp-widget-loaded ~ .or-separator::before {
-      margin-right:.5em;
-    }
-   .bwp-widget-loaded ~ .or-separator::after {
-      margin-left:.5em;
-   }
-   .bwp-widget-loaded ~ .or-separator::after, .bwp-widget-loaded ~ .or-separator::before {
-      content: "";
-      border-bottom: 1px solid black;
-      flex: 1;
-   }
-</style>
+      }
 
-<div class="bwp-widget-and-separator-container">
-    <!-- SAMPLE Beginning of Buy With Prime Widget -->
-    <!-- SAMPLE End of Buy With Prime Widget -->
-    <span class="or-separator">OR</span>
-</div>
+      .bwp-widget-loaded ~ .or-separator {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        margin-top: 6px;
+      }
 
-<script>
-    function radioCheck() {
-        let bodyElementClassName = "template-product";
+      .bwp-widget-loaded ~ .or-separator::before {
+        margin-right: .5em;
+      }
+
+      .bwp-widget-loaded ~ .or-separator::after {
+        margin-left: .5em;
+      }
+
+      .bwp-widget-loaded ~ .or-separator::after,
+      .bwp-widget-loaded ~ .or-separator::before {
+        content: "";
+        border-bottom: 1px solid black;
+        flex: 1;
+      }
+    </style>
+
+    <div class="bwp-widget-and-separator-container">
+      <span class="or-separator">OR</span>
+    </div>
+
+    <script>
+      function radioCheck() {
         let radioElementClassName = "rc-radio__input rc_widget__option__input";
         let oneTimeRadioElementValue = "onetime";
         let bwpButtonClass = "bwp-widget-loaded";
-        
+
         try {
-            if (document.getElementsByClassName(radioElementClassName)[0].getAttribute("onchange") == null) {
-                document.getElementsByClassName(radioElementClassName)[0].setAttribute("onchange", "radioCheck()");
-                document.getElementsByClassName(radioElementClassName)[1].setAttribute("onchange", "radioCheck()");
+          if (document.getElementsByClassName(radioElementClassName)[0].getAttribute("onchange") == null) {
+            document.getElementsByClassName(radioElementClassName)[0].setAttribute("onchange", "radioCheck()");
+            document.getElementsByClassName(radioElementClassName)[1].setAttribute("onchange", "radioCheck()");
+          }
+
+          if (
+            document.getElementsByClassName(radioElementClassName)[0].checked &&
+            document.getElementsByClassName(radioElementClassName)[0].value === oneTimeRadioElementValue
+          ) {
+            if (document.querySelector("#bwpFrame")) {
+              document.querySelector("#bwpFrame").hidden = false;
+              document.getElementsByClassName("or-separator")[0].removeAttribute("style");
             }
-             
-            if (document.getElementsByClassName(radioElementClassName)[0].checked &&
-                document.getElementsByClassName(radioElementClassName)[0].value === oneTimeRadioElementValue) {
-     
-                if (document.querySelector("#bwpFrame")){
-                    document.querySelector("#bwpFrame").hidden = false;
-                    document.getElementsByClassName("or-separator")[0].removeAttribute("style");
-                }
-     
-            } else {
-                if (document.getElementsByClassName(bwpButtonClass).length > 0){
-                    document.querySelector("#bwpFrame").hidden = true;
-                    document.getElementsByClassName("or-separator")[0].setAttribute("style", "display: none !important");
-                }
+          } else {
+            if (document.getElementsByClassName(bwpButtonClass).length > 0) {
+              document.querySelector("#bwpFrame").hidden = true;
+              document.getElementsByClassName("or-separator")[0].setAttribute("style", "display: none !important");
             }
-        } catch(TypeError){};
-    }
-     
-    // bodyElementClassName is the class of the <body> element
-    const bwpTargetNode = document.getElementsByClassName("template-product")[0];
-     
-    // What to observe
-    const bwpConfig = {subtree: true, childList: true};
-     
-    // Execute mutations
-    const bwpCallback = (mutationList, observer) => {
+          }
+        } catch(TypeError) {};
+      }
+
+      const bwpTargetNode = document.getElementsByClassName("template-product")[0];
+      const bwpConfig = { subtree: true, childList: true };
+
+      const bwpCallback = (mutationList, observer) => {
         for (const mutation of mutationList) {
-            if (mutation.type === "childList") {
-                radioCheck();
-            }
+          if (mutation.type === "childList") {
+            radioCheck();
+          }
         }
-    };
-     
-    // Create an observer variable
-    const bwpObserver = new MutationObserver(bwpCallback);
-     
-    // Start observing the target node
-    bwpObserver.observe(bwpTargetNode, bwpConfig);
- </script>
-      
-  <!-- End of Buy With Prime Widget -->
+      };
+
+      const bwpObserver = new MutationObserver(bwpCallback);
+
+      if (bwpTargetNode) {
+        bwpObserver.observe(bwpTargetNode, bwpConfig);
+      }
+    </script>
+    <!-- End of Buy With Prime Widget -->
 
     {% if enable_dynamic_buttons %}
-
       {{ form | payment_button }}
 
-{% if product.sku %}
-    <div
-        id="amzn-buy-now"
-        data-site-id="2iom9jxkii"
-        data-widget-id="w-6AuDJuMuDz18e1F705aBe8"
-        data-sku="{{product.sku}}"
-    ></div>
-{% else %}
-    <div
-        id="amzn-buy-now"
-        data-site-id="2iom9jxkii"
-        data-widget-id="w-6AuDJuMuDz18e1F705aBe8"
-        data-sku="{{product.selected_or_first_available_variant.sku}}"
-    ></div>
-{% endif %}
-
+      {% if product.sku %}
+        <div
+          id="amzn-buy-now"
+          data-site-id="2iom9jxkii"
+          data-widget-id="w-6AuDJuMuDz18e1F705aBe8"
+          data-sku="{{ product.sku }}"
+        ></div>
+      {% else %}
+        <div
+          id="amzn-buy-now"
+          data-site-id="2iom9jxkii"
+          data-widget-id="w-6AuDJuMuDz18e1F705aBe8"
+          data-sku="{{ current_variant.sku }}"
+        ></div>
+      {% endif %}
     {% endif %}
 
   {% if enable_dynamic_buttons %}
     </div>
   {% endif %}
-    <div id="VariantsJson-{{ section_id }}" class="hide" aria-hidden="true">
+
+  <div id="VariantsJson-{{ section_id }}" class="hide" aria-hidden="true">
     {{ product.variants | json }}
   </div>
 
-  
-<p style="text-align: center;margin-bottom:0px;margin-top:25px;">
-			<img class="ccdisplay" src="https://cdn.shopify.com/s/files/1/0062/5793/4454/files/cc-visa-2x.png" alt="">
-              <img class="ccdisplay" src="https://cdn.shopify.com/s/files/1/0062/5793/4454/files/cc-american-2x.png">
-              <img class="ccdisplay" src="https://cdn.shopify.com/s/files/1/0062/5793/4454/files/cc-discover-2x.png">
-              <img class="ccdisplay" src="https://cdn.shopify.com/s/files/1/0062/5793/4454/files/cc-mastercard-2x.png">
-              <img class="ccdisplay" src="https://cdn.shopify.com/s/files/1/0062/5793/4454/files/paypal.png">
-			</p>
-            <p style="text-align: center;margin-bottom:0px;"><br><div style="font-size:13px;font-weight:400;text-align:center;"><span style="width: 15px;height: 15px;fill: #1d7f3a;display: inline-block;position: relative;margin-right: 5px;top: 2px;">
-<!--?xml version="1.0" encoding="iso-8859-1"?-->
-<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+  <p style="text-align: center;margin-bottom:0px;margin-top:25px;">
+    <img class="ccdisplay" src="https://cdn.shopify.com/s/files/1/0062/5793/4454/files/cc-visa-2x.png" alt="">
+    <img class="ccdisplay" src="https://cdn.shopify.com/s/files/1/0062/5793/4454/files/cc-american-2x.png" alt="">
+    <img class="ccdisplay" src="https://cdn.shopify.com/s/files/1/0062/5793/4454/files/cc-discover-2x.png" alt="">
+    <img class="ccdisplay" src="https://cdn.shopify.com/s/files/1/0062/5793/4454/files/cc-mastercard-2x.png" alt="">
+    <img class="ccdisplay" src="https://cdn.shopify.com/s/files/1/0062/5793/4454/files/paypal.png" alt="">
+  </p>
 
-<svg version="1.1" id="Capa_1___nWyj9WTt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 401.998 401.998" style="enable-background:new 0 0 401.998 401.998;" xml:space="preserve">
-	<path d="M357.45,190.721c-5.331-5.33-11.8-7.993-19.417-7.993h-9.131v-54.821c0-35.022-12.559-65.093-37.685-90.218
-		C266.093,12.563,236.025,0,200.998,0c-35.026,0-65.1,12.563-90.222,37.688C85.65,62.814,73.091,92.884,73.091,127.907v54.821
-		h-9.135c-7.611,0-14.084,2.663-19.414,7.993c-5.33,5.326-7.994,11.799-7.994,19.417V374.59c0,7.611,2.665,14.086,7.994,19.417
-		c5.33,5.325,11.803,7.991,19.414,7.991H338.04c7.617,0,14.085-2.663,19.417-7.991c5.325-5.331,7.994-11.806,7.994-19.417V210.135
-		C365.455,202.523,362.782,196.051,357.45,190.721z M274.087,182.728H127.909v-54.821c0-20.175,7.139-37.402,21.414-51.675
-		c14.277-14.275,31.501-21.411,51.678-21.411c20.179,0,37.399,7.135,51.677,21.411c14.271,14.272,21.409,31.5,21.409,51.675V182.728
-		z"></path>
-</svg>
-</span>Secure 256-bit SSL encryption</div></p>
+  <div style="font-size:13px;font-weight:400;text-align:center;">
+    <span style="width: 15px;height: 15px;fill: #1d7f3a;display: inline-block;position: relative;margin-right: 5px;top: 2px;">
+      <svg version="1.1" id="Capa_1___nWyj9WTt" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 401.998 401.998" style="enable-background:new 0 0 401.998 401.998;" xml:space="preserve">
+        <path d="M357.45,190.721c-5.331-5.33-11.8-7.993-19.417-7.993h-9.131v-54.821c0-35.022-12.559-65.093-37.685-90.218C266.093,12.563,236.025,0,200.998,0c-35.026,0-65.1,12.563-90.222,37.688C85.65,62.814,73.091,92.884,73.091,127.907v54.821h-9.135c-7.611,0-14.084,2.663-19.414,7.993c-5.33,5.326-7.994,11.799-7.994,19.417V374.59c0,7.611,2.665,14.086,7.994,19.417c5.33,5.325,11.803,7.991,19.414,7.991H338.04c7.617,0,14.085-2.663,19.417-7.991c5.325-5.331,7.994-11.806,7.994-19.417V210.135C365.455,202.523,362.782,196.051,357.45,190.721z M274.087,182.728H127.909v-54.821c0-20.175,7.139-37.402,21.414-51.675c14.277-14.275,31.501-21.411,51.678-21.411c20.179,0,37.399,7.135,51.677,21.411c14.271,14.272,21.409,31.5,21.409,51.675V182.728z"></path>
+      </svg>
+    </span>
+    Secure 256-bit SSL encryption
+  </div>
 {% endform %}

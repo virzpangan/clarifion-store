@@ -90,6 +90,12 @@
               </a>
             {% endif %}
 
+            {% if product.variants.size > 1 %}
+              {% assign current_variant = product.variants[1] %}
+            {% else %}
+              {% assign current_variant = product.selected_or_first_available_variant %}
+            {% endif %}
+            
             {% if settings.sku_enable %}
               <p id="Sku-{{ section_id }}" class="product-single__sku">
                 {% if current_variant.sku %}

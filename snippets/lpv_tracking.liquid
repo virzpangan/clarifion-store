@@ -1,14 +1,27 @@
 {% liquid
   assign lpv_value = blank
+  assign current_slug_path = blank
 
-  if product and product.metafields.custom.landing_page_lpv.value != blank
-    assign lpv_value = product.metafields.custom.landing_page_lpv.value
-  elsif page and page.metafields.custom.landing_page_lpv.value != blank
-    assign lpv_value = page.metafields.custom.landing_page_lpv.value
+  if product
+    assign current_slug_path = 'products-' | append: product.handle | replace: '-', '_'
+  elsif collection
+    assign current_slug_path = 'collections-' | append: collection.handle | replace: '-', '_'
+  elsif page
+    assign current_slug_path = 'pages-' | append: page.handle | replace: '-', '_'
+  elsif article
+    assign article_handle = article.handle | replace: '-', '_'
+    assign blog_handle = blog.handle | replace: '-', '_'
+    assign current_slug_path = 'blogs-' | append: blog_handle | append: '-' | append: article_handle
+  elsif blog
+    assign blog_handle = blog.handle | replace: '-', '_'
+    assign current_slug_path = 'blogs-' | append: blog_handle
+  else
+    assign current_slug_path = request.path | remove_first: '/' | replace: '/', '-' | replace: '-', '_'
   endif
 
-  assign lpv_value = lpv_value | strip
+assign lpv_value = current_slug_path
 %}
+
 
 {% if lpv_value != blank %}
   <script>

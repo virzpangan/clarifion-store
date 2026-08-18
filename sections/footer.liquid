@@ -1,4 +1,5 @@
 <footer class="site-footer">
+{% render 'newsletter-cta' %}
   <div class="page-width">
 
     <div class="grid">
@@ -59,7 +60,6 @@
     {% endif %}
     <ul class="flink-2">
       <li><button onclick="GorgiasChat.open();">Live Chat</button></li>
-      <li><button onclick="getCollabButton();">Join our Influencer Program!</button></li>
     </ul>
     {% if section.settings.show_copyright %}
       <p class="footer__copyright">

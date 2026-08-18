@@ -8,6 +8,7 @@
     {% if option == color_swatch_drop %}
       {%- assign color_option_index = forloop.index0 -%}
       {%- assign downcased_option = color_swatch_drop.name | downcase -%}
+
       {% if downcased_option contains 'color' or downcased_option contains 'colour' %}
         {% assign is_color = true %}
       {% endif %}
@@ -16,26 +17,36 @@
 {% endif %}
 
 <div class="variant-wrapper variant-wrapper--{{ settings.variant_type }} js">
-  <label class="variant__label{% if option.name == 'Default' or option.name == 'Title' %} hidden-label{% endif %}"
-    for="ProductSelect-{{ section_id }}-option-{{ forloop.index0 }}">
+  <label
+    class="variant__label{% if option.name == 'Default' or option.name == 'Title' %} hidden-label{% endif %}"
+    for="ProductSelect-{{ section_id }}-option-{{ forloop.index0 }}"
+  >
     {{ option.name }}
+
     {% if is_color %}
       <span class="variant__label-info">
         &mdash;
         <span
           id="VariantColorLabel-{{ section_id }}-{{ forloop.index0 }}"
-          data-option-index="{{ color_option_index }}">
-          {{ option.selected_value }}
+          data-option-index="{{ color_option_index }}"
+        >
+          {{ current_variant.options[color_option_index] }}
         </span>
       </span>
     {% endif %}
   </label>
-  <fieldset class="variant-input-wrap"
+
+  <fieldset
+    class="variant-input-wrap"
     name="{{ option.name }}"
-    id="ProductSelect-{{ section_id }}-option-{{ forloop.index0 }}">
+    id="ProductSelect-{{ section_id }}-option-{{ forloop.index0 }}"
+  >
     {% assign option_index = forloop.index %}
+    {% assign option_index_zero = option_index | minus: 1 %}
+
     {% for value in option.values %}
       {%- assign variant_label_state = true -%}
+
       {% if product.options.size == 1 %}
         {% unless product.variants[forloop.index0].available %}
           {% unless is_color %}
@@ -43,8 +54,10 @@
           {% endunless %}
         {% endunless %}
       {% endif %}
-      <input type="radio"
-        {% if option.selected_value == value %} checked="checked"{% endif %}
+
+      <input
+        type="radio"
+        {% if current_variant.options[option_index_zero] == value %} checked="checked"{% endif %}
         {% unless variant_label_state %} disabled="disabled"{% endunless %}
         value="{{ value | escape }}"
         data-index="option{{ option_index }}"
@@ -52,10 +65,22 @@
         class="variant__input-{{ section_id }}{% unless variant_label_state %} disabled{% endunless %}{% if is_color %} variant__input--color-swatch-{{ section_id }}{% endif %}"
         {% if is_color %} data-color-name="{{ value | escape }}"{% endif %}
         {% if is_color %} data-color-index="{{ color_option_index }}"{% endif %}
-        id="ProductSelect-{{ section_id }}-option-{{ option.name | handleize }}-{{ value | url_encode }}">
+        id="ProductSelect-{{ section_id }}-option-{{ option.name | handleize }}-{{ value | url_encode }}"
+      >
+
       {% if is_color %}
-        {%- assign color_image = value | handle | append: '.' | append: swatch_file_extension | asset_img_url: '50x' | prepend: 'https:' | split: '?' | first -%}
+        {%- assign color_image = value
+          | handle
+          | append: '.'
+          | append: swatch_file_extension
+          | asset_img_url: '50x'
+          | prepend: 'https:'
+          | split: '?'
+          | first
+        -%}
+
         {%- assign color_swatch_fallback = value | split: ' ' | last | handle -%}
+
         <label
           for="ProductSelect-{{ section_id }}-option-{{ option.name | handleize }}-{{ value | url_encode }}"
           class="variant__color-swatch{% unless variant_label_state %} disabled{% endunless %}"
@@ -64,52 +89,36 @@
           {{ value | escape }}
         </label>
       {% else %}
-        <label for="ProductSelect-{{ section_id }}-option-{{ option.name | handleize }}-{{ value | url_encode }}"{% unless variant_label_state %} class="disabled"{% endunless %}>
-          
-         {{ value | escape }}
-       
-  
-          
-    {% if product.id != 4801495760980 %}
-         {% if forloop.index == 2 %}
-            {% for variant in product.variants %}
-          		{% if forloop.index == 2 %}
-              		<span class="savepercentage">Save {{ variant.compare_at_price | minus: variant.price | money}}
-            	{% endif %}
-             {% endfor %}
-         {% endif %}
-         {% if forloop.index == 3 %}
-            {% for variant in product.variants %}
-          		{% if forloop.index == 3 %}
-              		<span class="savepercentage">Save {{ variant.compare_at_price | minus: variant.price | money}}
-            	{% endif %}
-             {% endfor %}
-         {% endif %}
-         {% if forloop.index == 4 %}
-            {% for variant in product.variants %}
-          		{% if forloop.index == 4 %}
-              		<span class="savepercentage">Save {{ variant.compare_at_price | minus: variant.price | money}}
-            	{% endif %}
-             {% endfor %}
-         {% endif %}
-         {% if forloop.index == 5 %}
-            {% for variant in product.variants %}
-          		{% if forloop.index == 5 %}
-              		<span class="savepercentage">Save {{ variant.compare_at_price | minus: variant.price | money}}
-            	{% endif %}
-             {% endfor %}
-         {% endif %}
-                      
-    {% else %}
-                
-       {% if forloop.first == false%}
+        <label
+          for="ProductSelect-{{ section_id }}-option-{{ option.name | handleize }}-{{ value | url_encode }}"
+          {% unless variant_label_state %} class="disabled"{% endunless %}
+        >
+          {{ value | escape }}
 
-               <span class="savepercentage">Save {{forloop.index | minus: 1 | times: 5}}%</span>
+
+          {%- assign matched_variant = blank -%}
+
+          {%- for variant in product.variants -%}
+            {%- if variant.options[option_index_zero] == value -%}
+              {%- assign matched_variant = variant -%}
+              {%- break -%}
+            {%- endif -%}
+          {%- endfor -%}
+
+          {%- if matched_variant != blank and matched_variant.compare_at_price > matched_variant.price -%}
+            {%- assign savings_percentage = matched_variant.compare_at_price
+              | minus: matched_variant.price
+              | times: 100.0
+              | divided_by: matched_variant.compare_at_price
+              | round
+            -%}
+            {% if forloop.index == 4 %}
+            <span class="savepercentage">
+              Save {{ savings_percentage }}%
+            </span>
           {% endif %}
-          
-    {% endif %}
-          
-    </label>
+          {%- endif -%}
+        </label>
       {% endif %}
     {% endfor %}
   </fieldset>

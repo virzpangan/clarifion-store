@@ -1596,6 +1596,12 @@
     }
 }
 
+@media screen and (max-width: 579px) {
+    .announcement + .site-header {
+        padding-top: 49px;
+    }
+}
+
 @media screen and (max-width: 568px) {
     .sc-social {
         margin-top: -84px;

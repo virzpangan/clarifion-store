@@ -1,3 +1,5 @@
+{% render 'shogun-products', content: product %}
+{% comment %} {% endcomment %}
 {% if product.id == 8915338068274 or product.id == 8915338068274 %}
   <script>
       window.location.href = "https://clarifion.com/products/clarifionionizer";
@@ -31,9 +33,9 @@
   .shopify-payment-button__more-options {
     display: none;
 }
+{% if product.id == 10243014885682 %} .sc-prod_featured img{max-width: 90%!important;} {% endif %}
 </style>
 
-{% render 'shogun-products', content: product %}
 {{product.metafields.shogun.above}}
 {% section 'product-template' %}
 {% section 'custom-section-0523' %}
@@ -400,11 +402,11 @@ styles: {
             const billingTerms = document.querySelector('.rc_widget__option__plans');
             if (billingTerms != null) {
                 const spn = document.createElement("p");
-                const txt = document.createTextNode("Billing Terms: By enrolling in Clarifion's Subscribe & Save Program, you will be billed on a recurring basis at the price and frequency specified above. Cancel anytime by emailing support@clarifion.com, calling 949-502-0146, or accessing your account.");
+                const txt = document.createTextNode("Billing Terms: By enrolling in Clarifion's Subscribe & Save Program, you will be billed on a recurring basis at the price and frequency specified above. Cancel anytime by emailing support@clarifion.com, calling +1 562-454-1128, or accessing your account.");
                 spn.appendChild(txt);
                 billingTerms.appendChild(spn);
             }
         }, 4000);
     });
 </script>
-
+{{ product.metafields.shogun.optimizer }}
