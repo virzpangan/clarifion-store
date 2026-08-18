@@ -434,11 +434,21 @@
   background: #000;
 }
 
-.video-poster {
+.video-poster1 {
   position: absolute;
   inset: 0;
   z-index: 0;
   background-image: url('https://cdn.shopify.com/s/files/1/0268/0638/6772/files/clf-ctv-poster.webp?v=1781663592');
+  background-size: cover;
+  background-position: center;
+  transition: opacity 0.45s ease, visibility 0.45s ease;
+}
+
+.video-poster2 {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: url('https://cdn.shopify.com/s/files/1/0268/0638/6772/files/smk-poster2.webp?v=1784638396');
   background-size: cover;
   background-position: center;
   transition: opacity 0.45s ease, visibility 0.45s ease;
@@ -540,6 +550,35 @@
 </style>
 <div class="cla-home">
   <div class="sc-banner-slider">
+      <!-- Video Slide Canada Smoke -->
+      <div>
+        <div class="slider-bg video-slide">
+          <div class="video-poster2"></div>
+
+          <video autoplay muted loop playsinline preload="auto">
+            <source src="https://cdn.shopify.com/videos/c/o/v/1b028672d4494468b56eb828eeb48b0b.mp4" type="video/mp4">
+          </video>
+
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12 text-center">
+                <div class="sc-banner-content">
+                  <span class="sc-banner-kicker">Smoke Outside. Fresh Air Inside.</span>
+
+                  <h2>When outdoor air quality changes, your home should be ready </h2>
+
+                  <p>Air quality alerts are impacting parts of the U.S. Help freshen the rooms where your family spends the most time with Clarifion.</p>
+
+                  <a href="./products/clarifion-whole-home-bundle/" class="sc-banner-btn">
+                    Shop Multi-Room Bundle
+                    <span></span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
      <!-- Video Slide -->
       <div>
         <div class="slider-bg video-slide">
