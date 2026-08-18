@@ -2000,7 +2000,7 @@ html input[disabled] {
   font-size: 12px;
   color: white;
   border-radius: 5px; 
-  padding: 3px;
+  padding: 3px 6px;
   text-transform: uppercase; 
   
 }
@@ -3989,7 +3989,7 @@ $color-blankstate-background: #f4f4f4;
   color: $colorFooterText;
 
   @include media-query($medium-up) {
-    padding-top: $gutter * 2;
+    /*padding-top: $gutter * 2;*/
     padding-bottom: $gutter * 2;
   }
 
@@ -8263,7 +8263,7 @@ $label-bottom-margin: 12px;
     display: inline-block;
     line-height: 1;
     font-weight: normal;
-    padding: 20px 15px 20px 45px;
+    padding: 20px 30px 20px 45px;
     margin: 4px 4px 1px 3px;
     font-style: normal;
     font-size: $type_base_size;
@@ -11243,6 +11243,7 @@ html {
 }
 
 .savepercentage {
+display:block!important;
     background: #237ae4!important;
     color: #fff;
     font-weight: 600;

@@ -9,7 +9,7 @@
  */
 {
   "current": {
-    "color_body_bg": "#ffffff",
+    "color_body_bg": "#FFFFFF",
     "color_body_text": "#000000",
     "color_borders": "#e8e8e1",
     "color_button": "#2c7ef8",
@@ -83,7 +83,7 @@
     "product_contact_show_phone": false,
     "enable_product_reviews": false,
     "reviews_layout": "expandable",
-    "cart_type": "page",
+    "cart_type": "drawer",
     "cart_additional_buttons": false,
     "cart_notes_enable": false,
     "cart_terms_conditions_enable": true,
@@ -653,6 +653,11 @@
       },
       "1248957848723945065": {
         "type": "shopify://apps/mntn/blocks/tracking-pixel/d40b5b2f-bf84-4a06-b576-832ad24a8652",
+        "disabled": false,
+        "settings": {}
+      },
+      "2786716548061469553": {
+        "type": "shopify://apps/applovin/blocks/app-embed/baa0f014-62ea-462f-a8aa-a94befb1cbad",
         "disabled": false,
         "settings": {}
       }

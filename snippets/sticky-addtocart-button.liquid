@@ -1,0 +1,221 @@
+<style>
+  .sticky-atc-bar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 64px;
+    background: #242424;
+    color: #ffffff;
+    box-shadow: 0 -8px 28px rgba(0, 0, 0, 0.22);
+    transform: translateY(110%);
+    opacity: 0;
+    transition: transform 0.35s ease, opacity 0.35s ease;
+  }
+
+  .sticky-atc-bar.is-visible {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  .sticky-atc-info {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0 24px;
+    min-width: 0;
+    font-size: 15px;
+    font-weight: 700;
+  }
+
+  .sticky-atc-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .sticky-atc-price {
+    white-space: nowrap;
+  }
+
+  .sticky-atc-button {
+    align-self: stretch;
+    min-width: 270px;
+    padding: 0 36px;
+    border: 0;
+    background: #2c7ef8;
+    color: #000000;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.25s ease, transform 0.25s ease;
+  }
+
+  .sticky-atc-button:hover {
+    background: #2c7ef8;
+    opacity: 0.8;
+  }
+
+  .sticky-atc-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.65;
+  }
+
+  body.has-sticky-atc {
+    padding-bottom: 64px;
+  }
+
+  .sticky-atc-button {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .sticky-atc-loader {
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(0, 0, 0, 0.28);
+    border-top-color: #000000;
+    border-radius: 50%;
+    display: none;
+    animation: stickyATCSpin 0.75s linear infinite;
+  }
+
+  .sticky-atc-button.is-loading {
+    pointer-events: none;
+    opacity: 0.85;
+  }
+
+  .sticky-atc-button.is-loading .sticky-atc-loader {
+    display: inline-block;
+  }
+
+  .sticky-atc-button.is-loading .sticky-atc-button-text {
+    opacity: 0.85;
+  }
+
+  .sticky-atc-button {
+    color: #ffffff;
+  }
+
+  .sticky-atc-loader {
+    border-color: rgba(255, 255, 255, 0.35);
+    border-top-color: #ffffff;
+  }
+
+  @keyframes stickyATCSpin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .sticky-atc-bar {
+      min-height: 66px;
+    }
+
+    .sticky-atc-info {
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 2px;
+      padding: 0 14px;
+      font-size: 13px;
+    }
+
+    .sticky-atc-button {
+      min-width: 145px;
+      padding: 0 18px;
+      font-size: 14px;
+    }
+
+    body.has-sticky-atc {
+      padding-bottom: 66px;
+    }
+  }
+</style>
+{% if product %}
+  <div class="sticky-atc-bar" id="StickyATC">
+    <div class="sticky-atc-info">
+      <span class="sticky-atc-title">
+        {{ product.title }}
+      </span>
+
+      <span class="sticky-atc-price">
+       {{ current_variant.price | money }}
+      </span>
+    </div>
+
+    <button
+      type="button"
+      class="sticky-atc-button"
+      id="StickyATCButton"
+      {% unless product.selected_or_first_available_variant.available %}
+        disabled
+      {% endunless %}
+    >
+      <span class="sticky-atc-button-text">
+        {% if product.selected_or_first_available_variant.available %}
+          Add to Basket
+        {% else %}
+          Sold Out
+        {% endif %}
+      </span>
+
+      <span class="sticky-atc-loader" aria-hidden="true"></span>
+    </button>
+  </div>
+{% endif %}
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const stickyBar = document.getElementById('StickyATC');
+    const stickyButton = document.getElementById('StickyATCButton');
+
+    if (!stickyBar || !stickyButton) return;
+
+    const productForm =
+      document.querySelector('form[action="/cart/add"]') ||
+      document.querySelector('product-form form') ||
+      document.querySelector('.product-form form');
+
+    if (!productForm) return;
+
+    document.body.classList.add('has-sticky-atc');
+
+    function toggleStickyATC() {
+      const formRect = productForm.getBoundingClientRect();
+
+      if (formRect.bottom < 0) {
+        stickyBar.classList.add('is-visible');
+      } else {
+        stickyBar.classList.remove('is-visible');
+      }
+    }
+
+    window.addEventListener('scroll', toggleStickyATC);
+    toggleStickyATC();
+
+    stickyButton.addEventListener('click', function () {
+      const submitButton =
+        productForm.querySelector('[type="submit"]') || productForm.querySelector('button[name="add"]');
+
+      if (!submitButton || submitButton.disabled) return;
+
+      stickyButton.classList.add('is-loading');
+      stickyButton.setAttribute('disabled', 'disabled');
+
+      submitButton.click();
+
+      setTimeout(function () {
+        stickyButton.classList.remove('is-loading');
+        stickyButton.removeAttribute('disabled');
+      }, 3800);
+    });
+  });
+</script>
