@@ -118,11 +118,11 @@
         {%- assign animation_row = animation_row | plus: 1 -%}
         {% if customer %}
           <li class="mobile-nav__item{% unless template == 'index' %}{% if link.active %} mobile-nav__item--active{% endif %}{% endunless %} appear-animation appear-delay-{{ animation_row }}">
-            <a href="/account" class="mobile-nav__link">{{ 'layout.customer.account' | t }}</a>
+            <a href="{{ routes.account_url }}" class="mobile-nav__link">{{ 'layout.customer.account' | t }}</a>
           </li>
         {% else %}
           <li class="mobile-nav__item{% unless template == 'index' %}{% if link.active %} mobile-nav__item--active{% endif %}{% endunless %} appear-animation appear-delay-{{ animation_row }}">
-            <a href="/account/login" class="mobile-nav__link">{{ 'layout.customer.log_in' | t }}</a>
+            <a href="{{ routes.account_login_url }}" class="mobile-nav__link">{{ 'layout.customer.log_in' | t }}</a>
           </li>
         {% endif %}
       {% endif %}

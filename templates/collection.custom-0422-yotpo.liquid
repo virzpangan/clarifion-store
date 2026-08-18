@@ -1,0 +1,85 @@
+{{ 'bootstrap.min.css' | asset_url | stylesheet_tag }}
+{{ 'custom-style.css' | asset_url | stylesheet_tag }}
+
+<style>
+  .col-catalog .sc-title .title-wrapper {
+   	max-width: 100%!important; 
+  }
+  .col-catalog .sc-title {
+    padding-top:30px!important;
+    padding-bottom:15px!important;
+  }
+  .col-catalog .sc-list {
+    padding-top:40px!important;
+  }
+  
+  @media screen and (max-width: 520px) {
+	.col-catalog .sc-list {
+      	padding-top:5px!important;
+	}
+    .col-catalog .sc-list .list-wrapper {
+		padding: 20px 15px!important;
+	}
+    .col-catalog .sc-title .title-wrapper h2 {
+      	margin-bottom:10px!important;
+    }
+    .col-catalog .sc-list .list-content-wrapper p {
+     	letter-spacing: -.15px; 
+    }
+    .col-catalog .sc-title {
+      padding-top:15px!important;
+      padding-bottom:10px!important;
+    }
+  }
+</style>
+<div class="col-catalog">
+    <div class="sc-title">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="title-wrapper text-center">
+                        <h4>All Products</h4>
+                        <h2>Fresher air in any room, on any budget</h2>
+                        <p>Discover our fresh air solutions that support you and your family.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sc-list">
+        <div class="container">
+            <div class="row">
+                {% for product in collection.products %}
+                {% assign blurb = product.metafields.my_fields.blurb.value %}
+                <div class="col-md-6">
+                    <div class="list-wrapper">
+                        <div class="list-thumbnail-wrapper">
+                            <img src="{{ product.featured_image | img_url: '200x' }}"
+                                alt="{{ product.featured_image.alt }}">
+                        </div>
+                        <div class="list-content-wrapper">
+                            <h2>{{product.title }}</h2>
+                            <div style="margin-bottom: 17px;padding:0;" class="yotpo bottomLine" data-product-id="{% if product.id == 6746727383124 %}3703089791060{% elsif product.id == 6746729087060 %}6668548112468{%elsif product.id == 6746729742420 %}6660001431636{%else%}{{ product.id }}{% endif %}" data-url=""></div>
+                            <span class="list-price">
+                                {% if product.price_varies %}
+                                {%- assign price = product.price_min | money -%}
+                                {{ 'products.general.from_text_html' | t: price: price }}
+                                {% else %}
+                                {{ product.price | money }}
+                                {% endif %}
+                            </span>
+                            <p>{{blurb}}</p>
+                            <a class="{% if product.available %} btn-view {% else %} btn-sold-out {% endif %}"
+                                href="{{ product.url }}">{% if product.available %}
+                                View Product
+                                {% else %}
+                                Sold Out
+                                {% endif %}</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>

@@ -125,7 +125,7 @@
       "orders_processed_in_currency_html": "Orders will be processed in {{ currency }}.",
       "terms": "I agree with the terms and conditions",
       "terms_html": "I agree with the <a href='{{ url }}' target='_blank'>terms and conditions</a>",
-      "terms_confirm": "You must agree with the terms and conditions of sales to check out"
+      "terms_confirm": "To continue with your purchase, please agree to the Terms of Use and Privacy Policy."
     },
     "label": {
       "quantity": "Quantity",
@@ -320,7 +320,7 @@
   "shopify": {
     "checkout": {
       "thank_you": {
-        "thank_you_confirmed_order_with_email": "You'll receive a confirmation email with your order number shortly. Please feel free to contact Clear Air by phone at 855-326-2682 or by email: support@getaclearrear.com"
+        "thank_you_confirmed_order_with_email": "You'll receive a confirmation email with your order number shortly. Please feel free to contact Clarifion by phone at 949-502-0146 or by email: support@clarifion.com"
       },
       "alternative_payment_method_banner": {
         "or": "OR CONTINUE TO PAY WITH YOUR CREDIT CARD"

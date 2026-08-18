@@ -4,7 +4,7 @@
 
   {% if settings.show_breadcrumbs %}
     <nav class="breadcrumb" role="navigation" aria-label="breadcrumbs">
-      <a href="/account">{{ 'customer.account.title' | t }}</a>
+      <a href="{{ routes.account_url }}">{{ 'customer.account.title' | t }}</a>
       <span class="divider" aria-hidden="true">/</span>
       {{ 'customer.addresses.title' | t }}
     </nav>

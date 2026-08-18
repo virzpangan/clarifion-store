@@ -7,7 +7,7 @@
 {% endunless %}
 
 <div id="ProductSection-{{ section_id }}"
-  class="product-section"
+  class="product-section {% if product.tags contains 'sold-out' %}sold-out{% endif %}"
   data-section-id="{{ section_id }}"
   data-section-type="product-template"
   {% if settings.product_zoom_enable %}
@@ -31,11 +31,11 @@
 
       <div class="grid">
         <div class="grid__item {{ product_image_width }}">
-          {% include 'product-images', section_id: section_id, isModal: isModal, thumbnail_position: thumbnail_position %}
+          {% include 'product-images', section_id: section_id, isModal: isModal, thumbnail_position: thumbnail_position %}          
         </div>
 
         <div class="grid__item {{ product_description_width }}">
-
+          
           <div class="product-single__meta">
             {% if settings.vendor_enable %}
               <div class="product-single__vendor">
@@ -52,23 +52,33 @@
                 {{ product.title }}
               </h1>
             {% endif %}
-			<div class="yotpo bottomLine"
-              data-product-id="{{ product.id }}">
-              {%- assign yotpo_offload_content = shop.metafields.yotpo.yotpo_offload_content %}
-            {%- assign time_now = 'now' | date: '%s' %}
-            {%- assign yotpo_live_time = shop.metafields.yotpo.yotpo_live | date: '%s' %}
-            {%- assign diff_seconds_from_live = time_now | minus: yotpo_live_time %}
-            {%- assign yotpo_bottomline_last_updated = product.metafields.yotpo.bottomline_update_time | date: '%s' %}
-            {%- assign diff_seconds_from_last_bottomline_update = time_now | minus: yotpo_bottomline_last_updated %}
-            {%- if yotpo_live_time and diff_seconds_from_live < 86400 and yotpo_bottomline_last_updated and diff_seconds_from_last_bottomline_update < 86400 -%}
-             {%- assign yotpo_bottomline_obsolete = false %}
-            {%- else %}
-             {%- assign yotpo_bottomline_obsolete = true %}
-            {%- endif %}
-            {%- if yotpo_offload_content == 'yes' and yotpo_bottomline_obsolete != true -%}
-             {{ product.metafields.yotpo.bottomline }}
-            {%- endif %}
-            </div>
+            
+            {% if product.id == 6650077839444 %}
+            {{ product.description }}
+          	{% endif %}
+
+            {% if product.sku %}
+                <div
+                    id="amzn-roa-rating"
+                    data-site-id="icia5cnbh4"
+                    data-roa-instance-id="jqzqfg7ry5lr1"
+                    data-sku="{{product.sku}}"
+                ></div>
+            {% else %}
+                <div
+                    id="amzn-roa-rating"
+                    data-site-id="icia5cnbh4"
+                    data-roa-instance-id="jqzqfg7ry5lr1"
+                    data-sku="{{product.selected_or_first_available_variant.sku}}">
+                </div>
+            {% endif %}
+            {% comment %}
+            <div class="ruk_rating_snippet" data-sku="{{ product.handle }};{{ product.variants | map: 'sku' | join: ';' }};{{ product.variants | map: 'id' | join: ';' }}"></div>
+            {% endcomment %}
+
+                      <div class="product-single__description-full rte">
+          {{ product.description }}
+        </div>
             {% if settings.enable_product_reviews and settings.reviews_layout == 'full' %}
               {% if isModal %}
                 {%- assign review_link = product.url | within: collection | append: '#Reviews-' | append: product.id -%}
@@ -130,6 +140,25 @@
                  {% endfor %}
               </script>
 
+              {% comment %}
+                If loaded in quick view, it might be from a JS-loaded function
+                that loads recommended products. If that's the case, the above
+                JS will not set the variant inventory. Add it to an accessible
+                data div to read later instead.
+              {% endcomment %}
+              {%- if isModal -%}
+                <div
+                  id="InventoryData-{{ section_id }}"
+                  data-section-id="{{ section_id }}"
+                  class="hide product__inventory-data"
+                  aria-hidden="true"
+                  {%- for variant in product.variants -%}
+                    data-{{ variant.id }}="{{ variant.inventory_quantity | default: 0 }}"
+                  {%- endfor -%}
+                  >
+                </div>
+              {%- endif -%}
+
               {%- assign inventory_visible = false -%}
               {% if current_variant.inventory_management == 'shopify' %}
                 {%- assign inventory_visible = true -%}
@@ -160,35 +189,15 @@
               <div id="ProductFormHolder-{{ section_id }}" data-url="{{ product.url }}"></div>
             {% endunless %}
 
-            {% unless description_style == 'full' %}
-              <div class="product-single__description rte">
-                {{ product.description }}
-              </div>
-
-              {% include 'product-additional-content', section_id: section_id %}
-            {% endunless %}
-
             {% if social %}
               {% include 'social-sharing', share_title: product.title, share_permalink: product.url, share_image: product %}
             {% endif %}
           </div>
         </div>
       </div>
-
-      {% if description_style == 'full' %}
-        <div class="product-single__description-full rte">
-          {{ product.description }}
-        </div>
-
-        {% include 'product-additional-content', section_id: section_id %}
-      {% endif %}
+		
     </div>
   </div>
-  {% if product.metafields.yotpo.reviews_count and product.metafields.yotpo.reviews_count != "0" %}
-  <div style="padding: 0 10%;" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
-  <span itemprop="itemReviewed">{{ product.title }}</span>
-  has a rating of <span itemprop="ratingValue">{{ product.metafields.yotpo.reviews_average }}</span> stars
-  based on <span itemprop="ratingCount">{{ product.metafields.yotpo.reviews_count }}</span> reviews.
-  </div>
-  {% endif %}
+  
+  
 </div>

@@ -128,15 +128,17 @@
         <div class="grid-product__price">
           {% if on_sale %}
             <span class="visually-hidden">{{ 'products.general.regular_price' | t }}</span>
-            <span class="grid-product__price--original">{{ product.compare_at_price | money }}</span>
+            
             <span class="visually-hidden">{{ 'products.general.sale_price' | t }}</span>
           {% endif %}
           {% if product.price_varies %}
             {% assign price = product.price_min | money %}
-            {{ 'products.general.from_text_html' | t: price: price }}
+            {{ price }}
+          from
           {% else %}
             {{ product.price  | money }}
           {% endif %}
+          <span class="grid-product__price--original">{{ product.compare_at_price | money }}</span>
         </div>
         {% if settings.enable_product_reviews %}
           <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>

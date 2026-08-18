@@ -1,0 +1,25 @@
+{% if content.discover != blank %}
+<div class="sc-prod_discover">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <hr>
+                <h3>{{ content.discover.title }}</h3>
+                <p>{{ content.discover.desc }}</p>
+            </div>
+        </div>
+        <div class="row">
+            {% for item in content.discover.list %}
+            <div class="col-md-4">
+                <figure>
+                    <img src="{{ item.image }}"
+                        alt="">
+                    <figcaption>{{ item.title }}</figcaption>
+                    <p>{{ item.desc }}</p>
+                </figure>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endif %}

@@ -4,7 +4,7 @@
   {% endif %}
   <div class="site-nav__icons">
     {% if shop.customer_accounts_enabled %}
-      <a class="site-nav__link site-nav__link--icon medium-down--hide" href="/account">
+      <a class="site-nav__link site-nav__link--icon medium-down--hide" href="{{ routes.account_url }}">
         {% include 'icon-user' %}
         <span class="icon__fallback-text">
           {% if customer %}
@@ -17,7 +17,7 @@
     {% endif %}
 
     {% if section.settings.header_search_enable %}
-      <a href="/search" class="site-nav__link site-nav__link--icon js-search-header js-no-transition{% if section.settings.main_menu_alignment == 'center' or section.settings.main_menu_alignment == 'center-split' %} large-up--hide{% endif %}">
+      <a href="{{ routes.search_url }}" class="site-nav__link site-nav__link--icon js-search-header js-no-transition{% if section.settings.main_menu_alignment == 'center' or section.settings.main_menu_alignment == 'center-split' %} large-up--hide{% endif %}">
         {% include 'icon-search' %}
         <span class="icon__fallback-text">{{ 'general.search.title' | t }}</span>
       </a>
@@ -33,7 +33,7 @@
       </button>
     {% endif %}
 
-    <a href="/cart" class="site-nav__link site-nav__link--icon js-drawer-open-cart js-no-transition" aria-controls="CartDrawer">
+    <a href="{{ routes.cart_url }}" class="site-nav__link site-nav__link--icon js-drawer-open-cart js-no-transition" aria-controls="CartDrawer">
       <span class="cart-link">
         {% include 'icon-cart' %}
         <span class="icon__fallback-text">{{ 'layout.cart.title' | t }}</span>

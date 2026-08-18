@@ -3560,12 +3560,29 @@ lazySizesConfig.expFactor = 4;
   
         $placeholder.load(url + this.selectors.sectionClass, function(data) {
           theme.reinitProductGridItem($section);
+          this.updateVariantInventory($section);
   
           // If no results, hide the entire section
           if ($(data).find(this.selectors.sectionClass).find(this.selectors.productResults).length === 0) {
             $section.addClass('hide');
           }
         }.bind(this));
+      },
+  
+      // Recommended products load via JS and don't add variant inventory to the
+      // global variable that we later check. This function scrapes a data div
+      // to get that info and manually add the values.
+      updateVariantInventory: function($section) {
+        window.inventories = window.inventories || {};
+  
+        $section.find('.product__inventory-data').each(function() {
+          var $el = $(this);
+          var sectionId = $el.data('section-id');
+          window.inventories[sectionId] = {};
+          $.each($el.data(), function(variant, qty) {
+            window.inventories[sectionId][variant] = qty;
+          })
+        });
       }
     });
   
@@ -4610,7 +4627,7 @@ lazySizesConfig.expFactor = 4;
   
           if (apiStatus !== 'loading') {
             apiStatus = 'loading';
-            if (typeof window.google === 'undefined') {
+            if (typeof window.google === 'undefined' || typeof window.google.maps === 'undefined' ) {
               $.getScript(
                 'https://maps.googleapis.com/maps/api/js?key=' + this.key
               ).then(function() {
@@ -5133,5 +5150,8 @@ lazySizesConfig.expFactor = 4;
     sections.register('map', theme.Maps);
     sections.register('blog', theme.Blog);
     sections.register('photoswipe', theme.Photoswipe);
+
+    
   });
 })(theme.jQuery);
+

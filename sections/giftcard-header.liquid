@@ -19,7 +19,7 @@
   <h1 class="site-header__logo{% unless has_logo %} text-center{% endunless %}" itemscope itemtype="http://schema.org/Organization">
     {% if section.settings.logo %}
       <a
-        href="/"
+        href="{{ routes.root_url }}"
         itemprop="url"
         class="site-header__logo-link">
         <img
@@ -35,7 +35,7 @@
           alt="{{ section.settings.logo.alt | default: shop.name }}">
       </a>
     {% else %}
-      <a href="/" itemprop="url">{{ shop.name }}</a>
+      <a href="{{ routes.root_url }}" itemprop="url">{{ shop.name }}</a>
     {% endif %}
   </h1>
 
