@@ -2,12 +2,12 @@
 
   {% if section.settings.announcement_link != blank %}
  {% comment %} <a href="{{ section.settings.announcement_link }}" class="announcement__link">  {% endcomment %}
-  <a href="https://clarifion.com/products/clarifionionizer/" class="announcement__link"> 
+  <a href="https://clarifion.com/products/clarifion-whole-home-bundle/" class="announcement__link"> 
   {% endif %}
 
     <span class="announcement__text{% unless sections.settings.announcement_closable %} announcement__text--open{% endunless %}" data-text="{{ section.settings.announcement_text | strip_html | handle }}">
      {% comment %} {{ section.settings.announcement_text | strip_html }} {% endcomment %}
-NEW: 9-Pack Now Available - Save 33% & Freshen Every Room in Your Home
+Air Quality Alert? Bring fresher air care into every room. Shop Clarifion → 
     </span>
     
 
