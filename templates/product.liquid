@@ -1,4 +1,4 @@
-
+{% render 'shogun-products', content: product %}
 {% if product.id == 8915338068274 or product.id == 8915338068274 %}
   <script>
       window.location.href = "https://clarifion.com/products/clarifionionizer";
@@ -18,7 +18,6 @@
 {% endif %}
 
 {{product.metafields.shogun.above}}
-{% render 'shogun-products', content: product %}
 {{ product.metafields.shogun.above }}
 {% assign custom_css = product.metafields.my_fields.custom_style.value %}
 
@@ -401,5 +400,5 @@ styles: {
     });
 </script>
 {{ product.metafields.shogun.below }}
-{{ product.metafields.shogun.optimizer }}
 {{product.metafields.shogun.below}}
+{{ product.metafields.shogun.optimizer }}

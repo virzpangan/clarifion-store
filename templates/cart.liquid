@@ -16,7 +16,7 @@
               <div class="grid__item medium-up--two-fifths medium-up--push-three-fifths">
                 <div class="grid grid--full">
                   <div class="grid__item one-third small--half text-center">
-                    {{ 'cart.label.quantity' | t }}
+                    {% comment %} {{ 'cart.label.quantity' | t }} {% endcomment %}
                   </div>
                   <div class="grid__item two-thirds small--half text-right">
                     {{ 'cart.label.total' | t }}
@@ -87,10 +87,10 @@
                   <div class="grid grid--full cart__row--table">
 
                     <div class="grid__item one-third medium-up--one-third medium-up--text-center">
-
+                       {% comment %}
                       <label for="updates_{{ item.key }}" class="visually-hidden">{{ 'cart.label.quantity' | t }}</label>
                       <input type="number" name="updates[]" id="updates_{{ item.key }}" class="cart__product-qty" value="{{ item.quantity }}" min="0" data-id="{{ item.key }}">
-
+                      {% endcomment %}
                     </div>
 
                     <div class="grid__item one-third text-center medium-up--hide">

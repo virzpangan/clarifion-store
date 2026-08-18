@@ -631,11 +631,6 @@
           "show_empty_stars": false
         }
       },
-      "17428600031447253342": {
-        "type": "shopify://apps/attentive/blocks/attn-tag/8df62c72-8fe4-407e-a5b3-72132be30a0d",
-        "disabled": false,
-        "settings": {}
-      },
       "11247749996023160269": {
         "type": "shopify://apps/952a5e79-opensend/blocks/opensend/b889318b-3248-4b8a-883c-85b7150ac2ee",
         "disabled": false,
@@ -643,6 +638,16 @@
       },
       "17676059084223943535": {
         "type": "shopify://apps/triplewhale/blocks/triple_pixel_snippet/483d496b-3f1a-4609-aea7-8eee3b6b7a2a",
+        "disabled": false,
+        "settings": {}
+      },
+      "855628211100114053": {
+        "type": "shopify://apps/klaviyo-email-marketing-sms/blocks/klaviyo-onsite-embed/2632fe16-c075-4321-a88b-50b567f42507",
+        "disabled": false,
+        "settings": {}
+      },
+      "13031214066075061788": {
+        "type": "shopify://apps/klickly-connector/blocks/klickly-embed/019d9086-f209-7d9a-959a-034ff6648e37",
         "disabled": false,
         "settings": {}
       }
