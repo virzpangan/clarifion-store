@@ -1,0 +1,26 @@
+{% liquid
+  assign lpv_value = blank
+
+  if product and product.metafields.custom.landing_page_lpv.value != blank
+    assign lpv_value = product.metafields.custom.landing_page_lpv.value
+  elsif page and page.metafields.custom.landing_page_lpv.value != blank
+    assign lpv_value = page.metafields.custom.landing_page_lpv.value
+  endif
+
+  assign lpv_value = lpv_value | strip
+%}
+
+{% if lpv_value != blank %}
+  <script>
+    (function () {
+      // LPV tracking only runs when custom.landing_page_lpv has a value
+      var lpvValue = {{ lpv_value | json }};
+      var currentUrl = new URL(window.location.href);
+
+      currentUrl.searchParams.set("lpv", lpvValue);
+
+      window.history.replaceState(null, "", currentUrl.toString());
+    })();
+  </script>
+
+{% endif %}
