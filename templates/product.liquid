@@ -1,0 +1,45 @@
+{% section 'product-template' %}
+{% section 'product-recommendations' %}
+{% section 'product-collection-links' %}
+
+<script>
+  // Override default values of shop.strings for each template.
+  // Alternate product templates can change values of
+  // add to cart button, sold out, and unavailable states here.
+  theme.productStrings = {
+    addToCart: {{ 'products.product.add_to_cart' | t | json }},
+    soldOut: {{ 'products.product.sold_out' | t | json }},
+    unavailable: {{ 'products.product.unavailable' | t | json }}
+  };
+</script>
+
+<style>
+  .yotpo-main-widget{
+  	padding: 30px 10%;
+  }
+</style>
+<script src="https://widget.sezzle.com/v1/javascript/price-widget?uuid=151a52cf-0d0a-4de1-b10a-cebb8fab81c9"></script>
+<div class="yotpo yotpo-main-widget"
+    data-product-id="{{ product.id }}"
+    data-name="{{ product.title | escape }}"
+    data-url="{{ shop.url }}{{ product.url }}"
+    data-image-url="{{ product.featured_image | product_img_url: "large" |replace: '?', '%3F' | replace: '&','%26'}}"
+    data-description="{{ product.description | escape }}">
+
+{%- assign yotpo_offload_content = shop.metafields.yotpo.yotpo_offload_content %}
+  {%- assign time_now = 'now' | date: '%s' %}
+  {%- assign yotpo_live_time = shop.metafields.yotpo.yotpo_live | date: '%s' %}
+  {%- assign diff_seconds_from_live = time_now | minus: yotpo_live_time %}
+  {%- assign yotpo_main_widget_last_updated = product.metafields.yotpo.main_widget_update_time | date: '%s' %}
+  {%- assign diff_seconds_from_last_main_widget_update = time_now | minus: yotpo_main_widget_last_updated %}
+  {%- if yotpo_live_time and diff_seconds_from_live < 86400 or yotpo_main_widget_last_updated and diff_seconds_from_last_main_widget_update < 86400 -%}
+    {%- assign yotpo_main_widget_obsolete = false %}
+  {%- else %}
+    {%- assign yotpo_main_widget_obsolete = true %}
+  {%- endif %}
+  {%- if yotpo_offload_content == 'yes' and yotpo_main_widget_obsolete != true -%}
+    {%- for field in product.metafields.yotpo_reviews -%}
+      {{ field | last }}
+    {%- endfor -%}
+  {%- endif %}
+</div>
