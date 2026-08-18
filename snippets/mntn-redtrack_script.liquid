@@ -1,0 +1,176 @@
+{% comment %}
+RedTrack Script Snippet
+
+Runs only when:
+- Current Shopify page or product has custom.mntn_redtrack_rtkcmpid value
+
+No section setting required.
+No LPV metafield check required.
+No render variable required.
+{% endcomment %}
+
+{% liquid
+  assign redtrack_rtkcmpid = blank
+
+  if product and product.metafields.custom.mntn_redtrack_rtkcmpid.value != blank
+    assign redtrack_rtkcmpid = product.metafields.custom.mntn_redtrack_rtkcmpid.value
+  elsif page and page.metafields.custom.mntn_redtrack_rtkcmpid.value != blank
+    assign redtrack_rtkcmpid = page.metafields.custom.mntn_redtrack_rtkcmpid.value
+  endif
+
+  assign redtrack_rtkcmpid = redtrack_rtkcmpid | strip
+%}
+
+{% if redtrack_rtkcmpid != blank %}
+
+  <!-- RedTrack Script Start -->
+  <script>
+    (function () {
+      var rtkcmpid = {{ redtrack_rtkcmpid | json }};
+      var preclickUrl = "https://att.trkt.clubearlybird.com/preclick";
+      var pretrackUrl = "https://att.trkt.clubearlybird.com/pretrack.js?rtkcmpid=" + encodeURIComponent(rtkcmpid);
+
+      var cartAttributeName = "clickid";
+      var hiddenLinkId = "redtrack-preclick-link";
+
+      function saveClickIdToCart(clickId) {
+        if (!clickId) return;
+
+        try {
+          var existingClickId = localStorage.getItem(cartAttributeName);
+
+          if (existingClickId === clickId) {
+            return;
+          }
+
+          localStorage.setItem(cartAttributeName, clickId);
+        } catch (error) {
+          // localStorage may be unavailable in some browsers
+        }
+
+        var formData = new FormData();
+        formData.append("attributes[" + cartAttributeName + "]", clickId);
+
+        fetch("/cart/update.js", {
+          method: "POST",
+          body: formData,
+          credentials: "same-origin"
+        }).catch(function () {
+          // Do not block storefront behavior if the cart update fails
+        });
+      }
+
+      function getClickIdFromElement(element) {
+        if (!element) return null;
+
+        var directClickId =
+          element.getAttribute("clickid") ||
+          element.getAttribute("data-clickid") ||
+          element.getAttribute("rtkclickid") ||
+          element.getAttribute("rtk-clickid") ||
+          element.dataset.clickid ||
+          null;
+
+        if (directClickId) {
+          return directClickId;
+        }
+
+        var href = element.getAttribute("href");
+
+        if (!href) {
+          return null;
+        }
+
+        try {
+          var url = new URL(href, window.location.origin);
+          return url.searchParams.get("clickid");
+        } catch (error) {
+          var match = href.match(/[?&]clickid=([^&]+)/);
+          return match ? decodeURIComponent(match[1]) : null;
+        }
+      }
+
+      function createHiddenPreclickLink() {
+        var existingLink = document.getElementById(hiddenLinkId);
+
+        if (existingLink) {
+          return existingLink;
+        }
+
+        var link = document.createElement("a");
+
+        link.id = hiddenLinkId;
+        link.href = preclickUrl;
+        link.style.display = "none";
+        link.setAttribute("aria-hidden", "true");
+        link.setAttribute("tabindex", "-1");
+        link.setAttribute("rel", "nofollow noopener");
+        link.textContent = "RedTrack Preclick";
+
+        document.body.appendChild(link);
+
+        return link;
+      }
+
+      function watchForClickId(link) {
+        var existingClickId = getClickIdFromElement(link);
+
+        if (existingClickId) {
+          saveClickIdToCart(existingClickId);
+        }
+
+        var observer = new MutationObserver(function (mutations) {
+          mutations.forEach(function (mutation) {
+            if (
+              mutation.type === "attributes" &&
+              ["href", "clickid", "data-clickid", "rtkclickid", "rtk-clickid"].indexOf(mutation.attributeName) !== -1
+            ) {
+              var clickId = getClickIdFromElement(link);
+
+              if (clickId) {
+                saveClickIdToCart(clickId);
+              }
+            }
+          });
+        });
+
+        observer.observe(link, {
+          attributes: true,
+          attributeFilter: ["href", "clickid", "data-clickid", "rtkclickid", "rtk-clickid"]
+        });
+      }
+
+      function loadRedtrackScript() {
+        var existingScript = document.querySelector('script[src*="att.trkt.clubearlybird.com/pretrack.js"]');
+
+        if (existingScript) {
+          return;
+        }
+
+        var script = document.createElement("script");
+
+        script.type = "text/javascript";
+        script.src = pretrackUrl;
+        script.defer = true;
+
+        document.head.appendChild(script);
+      }
+
+      function initRedtrack() {
+        var link = createHiddenPreclickLink();
+
+        watchForClickId(link);
+
+        loadRedtrackScript();
+      }
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initRedtrack);
+      } else {
+        initRedtrack();
+      }
+    })();
+  </script>
+  <!-- RedTrack Script End -->
+
+{% endif %}
