@@ -89,8 +89,8 @@
                             type: "Offer",
                             priceCurrency: "{{ cart.currency.iso_code }}",
                             price: "{{ ruk_current_variant.price | money_without_currency | replace: ',', '.' }}",
-                            itemCondition: "http://schema.org/NewCondition",
-                            availability: "http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}",
+                            itemCondition: "https://schema.org/NewCondition",
+                            availability: "https://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}",
                             url: "{{ shop.url }}{{ ruk_current_variant.url }}",
 
                             {% if ruk_current_variant.image %}

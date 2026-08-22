@@ -1044,5 +1044,20 @@
         ]
       }
     ]
+  },
+  {
+    "name": "Structured data (SEO)",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Controls Organization JSON-LD output site-wide. Social links are pulled from the Social media section."
+      },
+      {
+        "type": "image_picker",
+        "id": "schema_logo",
+        "label": "Organization logo",
+        "info": "Used for Organization structured data. Recommended at least 112 x 112px. Falls back to the favicon if empty."
+      }
+    ]
   }
 ]

@@ -1,25 +1,23 @@
 {%- assign current_variant = product.selected_or_first_available_variant -%}
 {%- assign review_rating = false -%}
-{% if settings.enable_product_reviews %}
-  {% if product.metafields.spr.reviews %}
-    {% capture review_data %}{{ product.metafields.spr.reviews }}{% endcapture %}
-    {%- assign rating_keyword = '"ratingValue"' -%}
-    {%- assign rd_a1 = review_data | split: rating_keyword -%}
-    {%- assign rd_a2 = rd_a1[1] | split: "=" -%}
-    {%- assign rd_a3 = rd_a2[1] | split: '"' -%}
-    {%- assign review_rating = rd_a3[1] | plus: 1 | minus: 1 -%}
+{%- assign review_count = 0 -%}
 
-    {%- assign count_keyword = '"reviewCount"' -%}
-    {%- assign rd_a1 = review_data | split: count_keyword -%}
-    {%- assign rd_a2 = rd_a1[1] | split: "=" -%}
-    {%- assign rd_a3 = rd_a2[1] | split: '"' -%}
-    {%- assign review_count = rd_a3[1] | plus: 1 | minus: 1 -%}
-  {% endif %}
-{% endif %}
+{%- comment -%}
+  Reviews.io writes aggregate rating data to Shopify's standard `reviews` namespace
+  (reviews.rating + reviews.rating_count), server-side rendered so crawlers see it
+  without JS. See https://support.reviews.io/en/articles/9184882-shopify-metafields
+  Gated on metafield presence rather than settings.enable_product_reviews, which also
+  toggles the unused legacy Shopify Product Reviews (spr) widgets.
+{%- endcomment -%}
+{%- assign reviews_rating_count = product.metafields.reviews.rating_count.value | plus: 0 -%}
+{%- if product.metafields.reviews.rating.value != blank and reviews_rating_count > 0 -%}
+  {%- assign review_rating = product.metafields.reviews.rating.value -%}
+  {%- assign review_count = reviews_rating_count -%}
+{%- endif -%}
 
 <script type="application/ld+json">
   {
-    "@context": "http://schema.org",
+    "@context": "https://schema.org",
     "@type": "Product",
     "offers": {
       "@type": "Offer",
@@ -34,11 +32,13 @@
     "description": {{ product.description | strip_html | json }},
     "category": "",
     "url": "{{ shop.url }}{{ product.url }}",
-    {% if review_rating %}
+    {% if review_rating and review_count > 0 %}
     "aggregateRating": {
       "@type": "AggregateRating",
       "ratingValue": "{{ review_rating }}",
-      "reviewCount": "{{ review_count }}"
+      "reviewCount": "{{ review_count }}",
+      "bestRating": "5",
+      "worstRating": "1"
     },
     {% endif %}
     "image": {
