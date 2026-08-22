@@ -42,10 +42,10 @@
     {% endstyle %}
 
     {% if template == 'index' %}
-      <h1 class="site-header__logo" itemscope itemtype="http://schema.org/Organization">
+      <h1 class="site-header__logo" itemscope itemtype="https://schema.org/Organization">
         <span class="visually-hidden">{{ shop.name }}</span>
     {% else %}
-      <div class="h1 site-header__logo" itemscope itemtype="http://schema.org/Organization">
+      <div class="h1 site-header__logo" itemscope itemtype="https://schema.org/Organization">
     {% endif %}
     {% if block.settings.logo %}
       {% comment %}
@@ -99,9 +99,9 @@
 
 {% unless has_logo %}
   {% if template == 'index' %}
-    <h1 class="site-header__logo" itemscope itemtype="http://schema.org/Organization">
+    <h1 class="site-header__logo" itemscope itemtype="https://schema.org/Organization">
   {% else %}
-    <div class="h1 site-header__logo" itemscope itemtype="http://schema.org/Organization">
+    <div class="h1 site-header__logo" itemscope itemtype="https://schema.org/Organization">
   {% endif %}
   <a href="{{ routes.root_url }}" itemprop="url" class="site-header__logo-link">
     {{ shop.name }}

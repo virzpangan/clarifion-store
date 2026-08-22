@@ -43,6 +43,28 @@
   </div>
 {%- endif -%}
 
+{%- assign faq_questions = section.blocks | where: 'type', 'question' -%}
+{%- if faq_questions.size > 0 -%}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {%- for block in faq_questions -%}
+      {
+        "@type": "Question",
+        "name": {{ block.settings.title | strip_html | json }},
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": {{ block.settings.text | strip_newlines | json }}
+        }
+      }{%- unless forloop.last -%},{%- endunless -%}
+      {%- endfor -%}
+    ]
+  }
+  </script>
+{%- endif -%}
+
 {% schema %}
   {
     "name": "Page.faq page",

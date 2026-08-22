@@ -1,636 +1,585 @@
 {{ 'slick-theme.css' | asset_url | stylesheet_tag }}
 <style>
-  .sc-banner-slider {
-    overflow: hidden;
-  }
-  .slider-bg {
-    height: 768px;
-    display: flex;
-    align-items: center;
-    background-color: #f5f5f5;
-  }
-  .slider-bg.bg1 {
-    background-image: url('https://cdn.shopify.com/s/files/1/0268/0638/6772/files/ionizer-slide-bg1.webp?v=1780663653');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-  }
-  .slider-bg.bg2 {
-    background-image: url('https://cdn.shopify.com/s/files/1/0268/0638/6772/files/clf-slide-bg1.webp?v=1780663653');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-  }
+    .sc-banner-slider {
+      overflow: hidden;
+    }
+    .slider-bg {
+      height: 768px;
+      display: flex;
+      align-items: center;
+      background-color: #f5f5f5;
+    }
+    .slider-bg.bg1 {
+      background-image: url('https://cdn.shopify.com/s/files/1/0268/0638/6772/files/ionizer-slide-bg1.webp?v=1780663653');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+    }
+    .slider-bg.bg2 {
+      background-image: url('https://cdn.shopify.com/s/files/1/0268/0638/6772/files/clf-slide-bg1.webp?v=1780663653');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+    }
 
-  .slider-bg.bg3 {
-    background-image: url('https://cdn.shopify.com/s/files/1/0268/0638/6772/files/slide3-bg.webp?v=1779830139');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-  }
+    .slider-bg.bogo {
+      background-image: url('https://cdn.shopify.com/s/files/1/0268/0638/6772/files/bg-bogo-ionizer.webp?v=1787302376');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+    }
 
-    .slider-bg.bg4 {
-    background-image: url('https://cdn.shopify.com/s/files/1/0268/0638/6772/files/xl-fathersday-banner.webp?v=1781281144');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center right;
-    pointer-events: all;
-    cursor: pointer;
-  }
+      .slider-bg.bogo2 {
+      background-image: url('https://cdn.shopify.com/s/files/1/0268/0638/6772/files/bg-bogo2-ionizer.webp?v=1787302530');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+    }
 
-    .slider-bg.bg5 {
-    background-image: url('https://cdn.shopify.com/s/files/1/0268/0638/6772/files/fd-bg-opt.webp?v=1781577181');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-  }
+    .slider-bg.bg3 {
+      background-image: url('https://cdn.shopify.com/s/files/1/0268/0638/6772/files/slide3-bg.webp?v=1779830139');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+    }
 
-  .fd-banner{
-  
+      .slider-bg.bg4 {
+      background-image: url('https://cdn.shopify.com/s/files/1/0268/0638/6772/files/xl-fathersday-banner.webp?v=1781281144');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center right;
       pointer-events: all;
-    cursor: pointer;
-  }
+      cursor: pointer;
+    }
+
+      .slider-bg.bg5 {
+      background-image: url('https://cdn.shopify.com/s/files/1/0268/0638/6772/files/fd-bg-opt.webp?v=1781577181');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .fd-banner{
+
+        pointer-events: all;
+      cursor: pointer;
+    }
 
 
 
-  .sc-banner-slider .slick-slide::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    background: rgba(0, 0, 0, 0.35);
-    pointer-events: none;
-  }
+    .sc-banner-slider .slick-slide::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: rgba(0, 0, 0, 0.35);
+      pointer-events: none;
+    }
 
 
-  {% comment %} .sc-banner-slider .slick-slide:nth-child(1)::before{
-    background:none!important;
-  } {% endcomment %}
+    {% comment %} .sc-banner-slider .slick-slide:nth-child(1)::before{
+      background:none!important;
+    } {% endcomment %}
 
-  .sc-banner-slider .slick-slide img {
-    position: relative;
-    z-index: 0;
-  }
+    .sc-banner-slider .slick-slide img {
+      position: relative;
+      z-index: 0;
+    }
 
-  .sc-banner-slider .slick-slide .slider-bg .row {
-    position: relative;
-    z-index: 2;
-  }
+    .sc-banner-slider .slick-slide .slider-bg .row {
+      position: relative;
+      z-index: 2;
+    }
 
-  .sc-banner-slider .slick-slide::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    background: linear-gradient(
-      90deg,
-      rgba(0, 28, 113, 0.78) 0%,
-      rgba(0, 28, 113, 0.55) 45%,
-      rgba(26, 152, 255, 0.22) 100%
-    );
-    pointer-events: none;
-  }
+    .sc-banner-slider .slick-slide::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(
+        90deg,
+        rgba(0, 28, 113, 0.78) 0%,
+        rgba(0, 28, 113, 0.55) 45%,
+        rgba(26, 152, 255, 0.22) 100%
+      );
+      pointer-events: none;
+    }
 
-  .sc-banner-slider {
-    position: relative;
-    overflow: hidden;
-  }
+    .sc-banner-slider {
+      position: relative;
+      overflow: hidden;
+    }
 
-  .sc-banner-slider .slick-slide {
-    position: relative;
-    overflow: hidden;
-  }
+    .sc-banner-slider .slick-slide {
+      position: relative;
+      overflow: hidden;
+    }
 
-  .sc-banner-slider .slick-slide img {
-    width: 100%;
-    display: block;
-    transform: scale(1.08);
-    transition: transform 6s ease;
-  }
+    .sc-banner-slider .slick-slide img {
+      width: 100%;
+      display: block;
+      transform: scale(1.08);
+      transition: transform 6s ease;
+    }
 
-  .sc-banner-slider .slick-active img {
-    transform: scale(1);
-  }
+    .sc-banner-slider .slick-active img {
+      transform: scale(1);
+    }
 
-  /* Optional: animate banner text/content */
-  .sc-banner-slider .slick-slide .banner-content {
-    opacity: 0;
-    transform: translateY(35px);
-    transition: opacity 0.9s ease, transform 0.9s ease;
-  }
+    /* Optional: animate banner text/content */
+    .sc-banner-slider .slick-slide .banner-content {
+      opacity: 0;
+      transform: translateY(35px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
+    }
 
-  .sc-banner-slider .slick-active .banner-content {
-    opacity: 1;
-    transform: translateY(0);
-    transition-delay: 0.35s;
-  }
+    .sc-banner-slider .slick-active .banner-content {
+      opacity: 1;
+      transform: translateY(0);
+      transition-delay: 0.35s;
+    }
 
-  /* Premium arrows */
-  .sc-slider-arrow {
-    position: absolute;
-    top: 50%;
-    z-index: 5;
-    width: 54px;
-    height: 54px;
-    border: 1px solid rgba(255, 255, 255, 0.35);
-    border-radius: 50%;
-    background: rgba(0, 0, 0, 0.28);
-    backdrop-filter: blur(12px);
-    cursor: pointer;
-    transform: translateY(-50%);
-    transition: all 0.35s ease;
-  }
-
-  .sc-slider-arrow:hover {
-    background: rgba(255, 255, 255, 0.18);
-    border-color: rgba(255, 255, 255, 0.75);
-    transform: translateY(-50%) scale(1.08);
-  }
-
-  .sc-slider-prev {
-    left: 32px;
-  }
-
-  .sc-slider-next {
-    right: 32px;
-  }
-
-  .sc-slider-arrow span {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 13px;
-    height: 13px;
-    border-top: 2px solid #fff;
-    border-right: 2px solid #fff;
-  }
-
-  .sc-slider-prev span {
-    transform: translate(-35%, -50%) rotate(-135deg);
-  }
-
-  .sc-slider-next span {
-    transform: translate(-65%, -50%) rotate(45deg);
-  }
-
-  /* Premium dots */
-  .sc-banner-slider .slick-dots {
-    bottom: 30px;
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-  }
-
-  .sc-banner-slider .slick-dots li {
-    width: auto;
-    height: auto;
-    margin: 0;
-  }
-
-  .sc-banner-slider .slick-dots button {
-    width: 34px;
-    height: 4px;
-    padding: 0;
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.35);
-    transition: all 0.35s ease;
-  }
-
-  .sc-banner-slider .slick-dots button:before {
-    display: none;
-  }
-
-  .sc-banner-slider .slick-dots .slick-active button {
-    width: 54px;
-    background: #fff;
-  }
-
-  /* Mobile adjustments */
-  @media (max-width: 768px) {
+    /* Premium arrows */
     .sc-slider-arrow {
-      width: 42px;
-      height: 42px;
+      position: absolute;
+      top: 50%;
+      z-index: 5;
+      width: 54px;
+      height: 54px;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.28);
+      backdrop-filter: blur(12px);
+      cursor: pointer;
+      transform: translateY(-50%);
+      transition: all 0.35s ease;
+    }
+
+    .sc-slider-arrow:hover {
+      background: rgba(255, 255, 255, 0.18);
+      border-color: rgba(255, 255, 255, 0.75);
+      transform: translateY(-50%) scale(1.08);
     }
 
     .sc-slider-prev {
-      left: 14px;
+      left: 32px;
     }
 
     .sc-slider-next {
-      right: 14px;
+      right: 32px;
     }
 
+    .sc-slider-arrow span {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 13px;
+      height: 13px;
+      border-top: 2px solid #fff;
+      border-right: 2px solid #fff;
+    }
+
+    .sc-slider-prev span {
+      transform: translate(-35%, -50%) rotate(-135deg);
+    }
+
+    .sc-slider-next span {
+      transform: translate(-65%, -50%) rotate(45deg);
+    }
+
+    /* Premium dots */
     .sc-banner-slider .slick-dots {
-      bottom: 18px;
+      bottom: 30px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .sc-banner-slider .slick-dots li {
+      width: auto;
+      height: auto;
+      margin: 0;
     }
 
     .sc-banner-slider .slick-dots button {
-      width: 24px;
+      width: 34px;
+      height: 4px;
+      padding: 0;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.35);
+      transition: all 0.35s ease;
+    }
+
+    .sc-banner-slider .slick-dots button:before {
+      display: none;
     }
 
     .sc-banner-slider .slick-dots .slick-active button {
-      width: 38px;
-    }
-   
-  }
-
-  .sc-banner-content {
-    position: relative;
-    z-index: 2;
-    margin: 0 auto;
-    padding: 120px 20px;
-    color: #fff;
-  }
-
-  .sc-banner-kicker {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 18px;
-    padding: 9px 18px;
-    border: 1px solid rgba(26, 152, 255, 0.45);
-    border-radius: 999px;
-    background: rgba(0, 28, 113, 0.42);
-    backdrop-filter: blur(12px);
-    color: #ffffff;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    box-shadow: 0 12px 30px rgba(0, 28, 113, 0.28);
-  }
-
-  .sc-banner-content h2 {
-    margin: 0 auto 18px;
-    color: #ffffff;
-    font-size: clamp(42px, 6vw, 82px);
-    font-weight: 800;
-    line-height: 1.02;
-    letter-spacing: -0.045em;
-    text-wrap: balance;
-    text-shadow: 0 18px 40px rgba(0, 28, 113, 0.45);
-  }
-
-  .sc-banner-content p {
-    max-width: 768px;
-    margin: 0 auto 34px;
-    color: rgba(255, 255, 255, 0.88);
-    font-size: clamp(16px, 2vw, 20px);
-    line-height: 1.65;
-  }
-
-  .sc-banner-btn {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    min-width: 170px;
-    justify-content: center;
-    padding: 16px 28px;
-    border-radius: 999px;
-    background: #1a98ff;
-    color: #ffffff;
-    font-size: 15px;
-    font-weight: 800;
-    letter-spacing: 0.02em;
-    text-decoration: none;
-    overflow: hidden;
-    box-shadow: 0 18px 42px rgba(26, 152, 255, 0.35);
-    transition: transform 0.35s ease, box-shadow 0.35s ease;
-  }
-
-  .sc-banner-btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -85%;
-    width: 70%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.42), transparent);
-    transform: skewX(-22deg);
-    transition: left 0.65s ease;
-  }
-
-  .sc-banner-btn:hover {
-    color: #ffffff;
-    text-decoration: none;
-    transform: translateY(-4px);
-    box-shadow: 0 24px 55px rgba(26, 152, 255, 0.48);
-  }
-
-  .sc-banner-btn:hover::before {
-    left: 120%;
-  }
-
-  .sc-banner-btn span {
-    width: 9px;
-    height: 9px;
-    border-top: 2px solid currentColor;
-    border-right: 2px solid currentColor;
-    transform: rotate(45deg);
-    transition: transform 0.35s ease;
-  }
-
-  .sc-banner-btn:hover span {
-    transform: translateX(4px) rotate(45deg);
-  }
-
-  .sc-banner-slider .sc-banner-content {
-    opacity: 0;
-    transform: translateY(36px) scale(0.98);
-    transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
-  .sc-banner-slider .slick-active .sc-banner-content {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-
-  .sc-banner-slider .slick-active .sc-banner-kicker {
-    animation: scFadeUp 0.8s ease both 0.15s;
-  }
-
-  .sc-banner-slider .slick-active h2 {
-    animation: scFadeUp 0.9s ease both 0.3s;
-  }
-
-  .sc-banner-slider .slick-active .coupon-banner{
-      animation: scFadeUp 0.9s ease both 0.45s;
-  }
-
-  .sc-banner-slider .slick-active p {
-    animation: scFadeUp 0.9s ease both 0.6s;
-  }
-
-  .sc-banner-slider .slick-active .sc-banner-btn {
-    animation: scFadeUp 0.9s ease both 0.7s;
-  }
-
-  .coupon-banner {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-
-  padding: 8px 12px;
-  border: 2px dashed #6aa0f6;
-  border-radius: 10px;
-
-  font-family: Arial, Helvetica, sans-serif;
-  background: #ffffff;
-
-  box-shadow: 0 18px 42px rgba(26, 152, 255, 0.35);
-  transition: transform 0.35s ease, box-shadow 0.35s ease;
-  margin-bottom: 10px;
-}
-
-.discount {
-  font-size: 26px;
-  font-weight: 800;
-  color: #123c9c;
-  line-height: 1; 
-}
-
-.text {
-  font-size: 26px;
-  font-weight: 400;
-  color: #555555;
-  line-height: 1;
-}
-
-.code {
-  font-size: 26px;
-  font-weight: 500;
-  color: #ffffff;
-  line-height: 1;
-
-  background: #316ff4;
-  padding: 8px 24px;
-  border-radius: 18px;
-}
-
-.coupon-note{
-  font-size: 15px!important;
-}
-
-  @keyframes scFadeUp {
-    from {
-      opacity: 0;
-      transform: translateY(26px);
+      width: 54px;
+      background: #fff;
     }
 
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
+    /* Mobile adjustments */
+    @media (max-width: 768px) {
+      .sc-slider-arrow {
+        width: 42px;
+        height: 42px;
+      }
 
-  .fd-banner.xs{display:none!important;}
+      .sc-slider-prev {
+        left: 14px;
+      }
 
+      .sc-slider-next {
+        right: 14px;
+      }
 
-/* Video slide with poster fallback */
-.slider-bg.video-slide {
-  position: relative;
-  overflow: hidden;
-  background: #000;
-}
+      .sc-banner-slider .slick-dots {
+        bottom: 18px;
+      }
 
-.video-poster1 {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  background-image: url('https://cdn.shopify.com/s/files/1/0268/0638/6772/files/clf-ctv-poster.webp?v=1781663592');
-  background-size: cover;
-  background-position: center;
-  transition: opacity 0.45s ease, visibility 0.45s ease;
-}
+      .sc-banner-slider .slick-dots button {
+        width: 24px;
+      }
 
-.video-poster2 {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  background-image: url('https://cdn.shopify.com/s/files/1/0268/0638/6772/files/smk-poster2.webp?v=1784638396');
-  background-size: cover;
-  background-position: center;
-  transition: opacity 0.45s ease, visibility 0.45s ease;
-}
+      .sc-banner-slider .slick-dots .slick-active button {
+        width: 38px;
+      }
 
-.slider-bg.video-slide video {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.slider-bg.video-slide.video-ready .video-poster {
-  opacity: 0;
-  visibility: hidden;
-}
-
-.slider-bg.video-slide .container {
-  position: relative;
-  z-index: 2;
-}
-  @media (max-width: 1200px) {
-    .slider-bg {
-      height: 600px;
-    }
-  }
-
-    @media (max-width: 992px) {
-    .slider-bg {
-      height: 496px;
-    }
-  }
-  @media (max-width: 768px) {
-
-    .slider-bg {
-      height: 384px;
     }
 
     .sc-banner-content {
-      padding: 90px 18px;
+      position: relative;
+      z-index: 2;
+      margin: 0 auto;
+      padding: 120px 20px;
+      color: #fff;
     }
 
     .sc-banner-kicker {
-      font-size: 11px;
-      padding: 8px 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+      padding: 9px 18px;
+      border: 1px solid rgba(26, 152, 255, 0.45);
+      border-radius: 999px;
+      background: rgba(0, 28, 113, 0.42);
+      backdrop-filter: blur(12px);
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      box-shadow: 0 12px 30px rgba(0, 28, 113, 0.28);
     }
 
     .sc-banner-content h2 {
-      font-size: clamp(34px, 10vw, 52px);
+      margin: 0 auto 18px;
+      color: #ffffff;
+      font-size: clamp(42px, 6vw, 82px);
+      font-weight: 800;
+      line-height: 1.02;
+      letter-spacing: -0.045em;
+      text-wrap: balance;
+      text-shadow: 0 18px 40px rgba(0, 28, 113, 0.45);
     }
 
     .sc-banner-content p {
-      font-size: 15px;
-      margin-bottom: 28px;
+      max-width: 768px;
+      margin: 0 auto 34px;
+      color: rgba(255, 255, 255, 0.88);
+      font-size: clamp(16px, 2vw, 20px);
+      line-height: 1.65;
     }
 
     .sc-banner-btn {
-      padding: 14px 24px;
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 170px;
+      justify-content: center;
+      padding: 16px 28px;
+      border-radius: 999px;
+      background: #1a98ff;
+      color: #ffffff;
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      overflow: hidden;
+      box-shadow: 0 18px 42px rgba(26, 152, 255, 0.35);
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
     }
+
+    .sc-banner-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -85%;
+      width: 70%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.42), transparent);
+      transform: skewX(-22deg);
+      transition: left 0.65s ease;
+    }
+
+    .sc-banner-btn:hover {
+      color: #ffffff;
+      text-decoration: none;
+      transform: translateY(-4px);
+      box-shadow: 0 24px 55px rgba(26, 152, 255, 0.48);
+    }
+
+    .sc-banner-btn:hover::before {
+      left: 120%;
+    }
+
+    .sc-banner-btn span {
+      width: 9px;
+      height: 9px;
+      border-top: 2px solid currentColor;
+      border-right: 2px solid currentColor;
+      transform: rotate(45deg);
+      transition: transform 0.35s ease;
+    }
+
+    .sc-banner-btn:hover span {
+      transform: translateX(4px) rotate(45deg);
+    }
+
+    .sc-banner-slider .sc-banner-content {
+      opacity: 0;
+      transform: translateY(36px) scale(0.98);
+      transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .sc-banner-slider .slick-active .sc-banner-content {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .sc-banner-slider .slick-active .sc-banner-kicker {
+      animation: scFadeUp 0.8s ease both 0.15s;
+    }
+
+    .sc-banner-slider .slick-active h2 {
+      animation: scFadeUp 0.9s ease both 0.3s;
+    }
+
+    .sc-banner-slider .slick-active .coupon-banner{
+        animation: scFadeUp 0.9s ease both 0.45s;
+    }
+
+    .sc-banner-slider .slick-active p {
+      animation: scFadeUp 0.9s ease both 0.6s;
+    }
+
+    .sc-banner-slider .slick-active .sc-banner-btn {
+      animation: scFadeUp 0.9s ease both 0.7s;
+    }
+
+    .coupon-banner {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 8px 12px;
+    border: 2px dashed #6aa0f6;
+    border-radius: 10px;
+
+    font-family: Arial, Helvetica, sans-serif;
+    background: #ffffff;
+
+    box-shadow: 0 18px 42px rgba(26, 152, 255, 0.35);
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+    margin-bottom: 10px;
   }
 
-   @media (max-width: 579px) {
+  .discount {
+    font-size: 26px;
+    font-weight: 800;
+    color: #123c9c;
+    line-height: 1;
+  }
 
-    .sc-banner-kicker {
-    font-size: 10px;
-    }
-      .slider-bg {
-        height: 480px;
-    }
-      .slider-bg.bg4 {
-        background-position: top;
-              background-image: url('https://cdn.shopify.com/s/files/1/0268/0638/6772/files/xs-fathersday-banner.webp?v=1781326995');
+  .text {
+    font-size: 26px;
+    font-weight: 400;
+    color: #555555;
+    line-height: 1;
+  }
+
+  .code {
+    font-size: 26px;
+    font-weight: 500;
+    color: #ffffff;
+    line-height: 1;
+
+    background: #316ff4;
+    padding: 8px 24px;
+    border-radius: 18px;
+  }
+
+  .coupon-note{
+    font-size: 15px!important;
+  }
+
+    @keyframes scFadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(26px);
       }
 
-      .coupon-note{
-  font-size: 13px!important;
-}
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-.discount {
-  font-size: 18px;
-}
-
-.text {
-  font-size: 18px;
- 
-}
-
-.code {
-  font-size: 18px;
-}
+    .fd-banner.xs{display:none!important;}
 
 
-
-      .fd-banner.xl{display:none!important;}
-      .fd-banner.xs{display:block!important;}
+  /* Video slide with poster fallback */
+  .slider-bg.video-slide {
+    position: relative;
+    overflow: hidden;
+    background: #000;
   }
+
+  .video-poster1 {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-image: url('https://cdn.shopify.com/s/files/1/0268/0638/6772/files/clf-ctv-poster.webp?v=1781663592');
+    background-size: cover;
+    background-position: center;
+    transition: opacity 0.45s ease, visibility 0.45s ease;
+  }
+
+  .video-poster2 {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-image: url('https://cdn.shopify.com/s/files/1/0268/0638/6772/files/smk-poster2.webp?v=1784638396');
+    background-size: cover;
+    background-position: center;
+    transition: opacity 0.45s ease, visibility 0.45s ease;
+  }
+
+  .slider-bg.video-slide video {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .slider-bg.video-slide.video-ready .video-poster {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .slider-bg.video-slide .container {
+    position: relative;
+    z-index: 2;
+  }
+    @media (max-width: 1200px) {
+      .slider-bg {
+        height: 600px;
+      }
+    }
+
+      @media (max-width: 992px) {
+      .slider-bg {
+        height: 496px;
+      }
+    }
+    @media (max-width: 768px) {
+
+      .slider-bg {
+        height: 384px;
+      }
+
+      .sc-banner-content {
+        padding: 90px 18px;
+      }
+
+      .sc-banner-kicker {
+        font-size: 11px;
+        padding: 8px 14px;
+      }
+
+      .sc-banner-content h2 {
+        font-size: clamp(34px, 10vw, 52px);
+      }
+
+      .sc-banner-content p {
+        font-size: 15px;
+        margin-bottom: 28px;
+      }
+
+      .sc-banner-btn {
+        padding: 14px 24px;
+      }
+    }
+
+     @media (max-width: 579px) {
+
+      .sc-banner-kicker {
+      font-size: 10px;
+      }
+        .slider-bg {
+          height: 480px;
+      }
+        .slider-bg.bg4 {
+          background-position: top;
+                background-image: url('https://cdn.shopify.com/s/files/1/0268/0638/6772/files/xs-fathersday-banner.webp?v=1781326995');
+        }
+
+        .coupon-note{
+    font-size: 13px!important;
+  }
+
+  .discount {
+    font-size: 18px;
+  }
+
+  .text {
+    font-size: 18px;
+
+  }
+
+  .code {
+    font-size: 18px;
+  }
+
+
+
+        .fd-banner.xl{display:none!important;}
+        .fd-banner.xs{display:block!important;}
+    }
 </style>
 <div class="cla-home">
   <div class="sc-banner-slider">
-      <!-- Video Slide Canada Smoke -->
-      <div>
-        <div class="slider-bg video-slide">
-          <div class="video-poster2"></div>
-
-          <video autoplay muted loop playsinline preload="auto">
-            <source src="https://cdn.shopify.com/videos/c/o/v/1b028672d4494468b56eb828eeb48b0b.mp4" type="video/mp4">
-          </video>
-
-          <div class="container">
-            <div class="row">
-              <div class="col-md-12 text-center">
-                <div class="sc-banner-content">
-                  <span class="sc-banner-kicker">Smoke Outside. Fresh Air Inside.</span>
-
-                  <h2>When outdoor air quality changes, your home should be ready </h2>
-
-                  <p>Air quality alerts are impacting parts of the U.S. Help freshen the rooms where your family spends the most time with Clarifion.</p>
-
-                  <a href="./products/clarifion-whole-home-bundle/" class="sc-banner-btn">
-                    Shop Multi-Room Bundle
-                    <span></span>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-     <!-- Video Slide -->
-      <div>
-        <div class="slider-bg video-slide">
-          <div class="video-poster"></div>
-
-          <video autoplay muted loop playsinline preload="auto">
-            <source src="https://cdn.shopify.com/videos/c/o/v/f123b572ffbd4b96a676334511b7afa5.mp4" type="video/mp4">
-          </video>
-
-          <div class="container">
-            <div class="row">
-              <div class="col-md-12 text-center">
-                <div class="sc-banner-content">
-                  <span class="sc-banner-kicker">Fresh Air, Made Simple</span>
-
-                  <h2>See Clarifion in action.</h2>
-
-                  <p>Enjoy fresher-feeling spaces with a compact, easy-to-use air solution.</p>
-
-                  <a href="./collections/all/" class="sc-banner-btn">
-                    Shop Now
-                    <span></span>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    {% comment %} <div>
-      <div class="slider-bg bg5">
+    <div>
+      <div class="slider-bg bogo2">
         <div class="container">
-          <!-- Slide 1 -->
+          <!-- Slide 2 -->
           <div class="row">
             <div class="col-md-12 text-center">
               <div class="sc-banner-content">
-                <span class="sc-banner-kicker">Happy Father's Day!</span>
+                <span class="sc-banner-kicker">3 DAYS ONLY!</span>
 
-                <h2>For the Dads Who Do It All</h2>
-
-                <div class="coupon-banner">
-                  <span class="discount">20%</span>
-                  <span class="text">Off Sitewide</span>
-                  <span class="code">DAD20</span>
-                </div>
-                <p class="coupon-note">Apply code at checkout</p>
-
-                <p>Give Dad fresher, more comfortable spaces to work, rest, & recharge.</p>
-
-                
-                <a href="./collections/all/" class="sc-banner-btn">
-                  Shop Father's Day Savings
+                <h2 style="margin-bottom:34px">
+                  BUY 3, GET 3 FREE <br>
+                  6 Clarifion Ionizers for $129.99
+                </h2>
+                <p>Buy More, Get More Free</p>
+                <a href="./products/ionizer-bogo-sale?variant=51618826387762" class="sc-banner-btn">
+                  Shop Now
                   <span></span>
                 </a>
               </div>
@@ -638,7 +587,68 @@
           </div>
         </div>
       </div>
-    </div> {% endcomment %}
+    </div>
+    <!-- Video Slide Canada Smoke -->
+    <div>
+      <div class="slider-bg video-slide">
+        <div class="video-poster2"></div>
+
+        <video autoplay muted loop playsinline preload="auto">
+          <source src="https://cdn.shopify.com/videos/c/o/v/1b028672d4494468b56eb828eeb48b0b.mp4" type="video/mp4">
+        </video>
+
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12 text-center">
+              <div class="sc-banner-content">
+                <span class="sc-banner-kicker">Smoke Outside. Fresh Air Inside.</span>
+
+                <h2>When outdoor air quality changes, your home should be ready</h2>
+
+                <p>
+                  Air quality alerts are impacting parts of the U.S. Help freshen the rooms where your family spends the
+                  most time with Clarifion.
+                </p>
+
+                <a href="./products/clarifion-whole-home-bundle/" class="sc-banner-btn">
+                  Shop Multi-Room Bundle
+                  <span></span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Video Slide -->
+    <div>
+      <div class="slider-bg video-slide">
+        <div class="video-poster"></div>
+
+        <video autoplay muted loop playsinline preload="auto">
+          <source src="https://cdn.shopify.com/videos/c/o/v/f123b572ffbd4b96a676334511b7afa5.mp4" type="video/mp4">
+        </video>
+
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12 text-center">
+              <div class="sc-banner-content">
+                <span class="sc-banner-kicker">Fresh Air, Made Simple</span>
+
+                <h2>See Clarifion in action.</h2>
+
+                <p>Enjoy fresher-feeling spaces with a compact, easy-to-use air solution.</p>
+
+                <a href="./collections/all/" class="sc-banner-btn">
+                  Shop Now
+                  <span></span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div>
       <div class="slider-bg bg1">
         <div class="container">
@@ -650,7 +660,10 @@
 
                 <h2>Create spaces that feel lighter.</h2>
 
-                <p>Dust. Pet dander. Lingering Odors. Stale rooms. Clarifion helps create fresher-feeling spaces without bulky purifiers or complicated setup.</p>
+                <p>
+                  Dust. Pet dander. Lingering Odors. Stale rooms. Clarifion helps create fresher-feeling spaces without
+                  bulky purifiers or complicated setup.
+                </p>
 
                 <a href="./products/clarifionionizer/" class="sc-banner-btn">
                   Shop Now
@@ -1051,13 +1064,12 @@
   });
 </script>
 <script>
-    window.addEventListener('DOMContentLoaded', () => {
-        const banner = document.querySelectorAll('.fd-banner');
-        banner.forEach((item) => {
-            item.addEventListener('click', () => {
-                window.location.href = './collections/all/';
-            });
-        });
-
+  window.addEventListener('DOMContentLoaded', () => {
+    const banner = document.querySelectorAll('.fd-banner');
+    banner.forEach((item) => {
+      item.addEventListener('click', () => {
+        window.location.href = './collections/all/';
+      });
     });
+  });
 </script>

@@ -1,21 +1,24 @@
-<div style="background-color:#143075" class="announcement{% if section.settings.announcement_closable %} announcement--closeable announcement--closed{% endif %}">
-
+<div
+  style="background-color:#143075"
+  class="announcement{% if section.settings.announcement_closable %} announcement--closeable announcement--closed{% endif %}"
+>
   {% if section.settings.announcement_link != blank %}
- {% comment %} <a href="{{ section.settings.announcement_link }}" class="announcement__link">  {% endcomment %}
-  <a href="https://clarifion.com/products/clarifion-whole-home-bundle/" class="announcement__link"> 
+    {% comment %} <a href="{{ section.settings.announcement_link }}" class="announcement__link">  {% endcomment %}
+    <a href="https://clarifion.com/products/ionizer-bogo-sale?variant=51618826387762" class="announcement__link">
   {% endif %}
 
-    <span class="announcement__text{% unless sections.settings.announcement_closable %} announcement__text--open{% endunless %}" data-text="{{ section.settings.announcement_text | strip_html | handle }}">
-     {% comment %} {{ section.settings.announcement_text | strip_html }} {% endcomment %}
-Air Quality Alert? Bring fresher air care into every room. Shop Clarifion → 
-    </span>
-    
+  <span
+    class="announcement__text{% unless sections.settings.announcement_closable %} announcement__text--open{% endunless %}"
+    data-text="{{ section.settings.announcement_text | strip_html | handle }}"
+  >
+    {% comment %} {{ section.settings.announcement_text | strip_html }} {% endcomment %}
+    3 DAYS ONLY: Buy 3 Clarifion Ionizers, Get 3 FREE → SHOP NOW
+  </span>
 
   {% if section.settings.announcement_link != blank %}
-  </a> 
+    </a>
   {% endif %}
 
-  
   {% if section.settings.announcement_closable %}
     <button type="button" class="text-link announcement__close">
       {% include 'icon-close' %}
