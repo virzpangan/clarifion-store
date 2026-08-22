@@ -9,6 +9,32 @@
 {% paginate collection.products by paginate_by %}
 
 <div id="CollectionSection" data-section-id="{{ section.id }}" data-section-type="collection-template">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": {{ collection.title | json }},
+    {%- if collection.description != blank %}
+    "description": {{ collection.description | strip_html | json }},
+    {%- endif %}
+    "url": "{{ shop.url }}{{ collection.url }}",
+    "mainEntity": {
+      "@type": "ItemList",
+      "numberOfItems": {{ paginate.items }},
+      "itemListElement": [
+        {%- for product in collection.products -%}
+        {
+          "@type": "ListItem",
+          "position": {{ forloop.index | plus: paginate.current_offset }},
+          "name": {{ product.title | json }},
+          "url": "{{ shop.url }}{{ product.url }}"
+        }{%- unless forloop.last -%},{%- endunless -%}
+        {%- endfor -%}
+      ]
+    }
+  }
+  </script>
+
   {% if section.settings.collection_image_enable and collection.image %}
     <div class="collection-hero loading--delayed">
       <div

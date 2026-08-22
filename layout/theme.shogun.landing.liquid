@@ -14,7 +14,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-PFQBJRBB');</script>
 <!-- End Google Tag Manager -->
   
-<script type="text/javascript">(function e(){var e=document.createElement("script");e.type="text/javascript",e.async=true,e.src="//staticw2.yotpo.com/eS1MrLRq5OtFeYwfzT5Dk3zHkvZsdcvb8nrrmnSv/widget.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();</script>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -34,6 +33,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   {%- endif -%}
 
   {% include 'social-meta-tags' %}
+
+  {% include 'schema-organization' %}
+  {% include 'schema-breadcrumbs' %}
 
   {% include 'font-face' %}
   {{ 'theme.scss.css' | asset_url | stylesheet_tag }}

@@ -1,0 +1,42 @@
+{%- comment -%}
+  Organization JSON-LD, rendered site-wide in <head>.
+  Logo: settings.schema_logo, falling back to the favicon.
+  sameAs: any social profile links configured in theme settings.
+{%- endcomment -%}
+{%- assign schema_logo = settings.schema_logo | default: settings.favicon -%}
+
+{%- assign social_sameas = '' -%}
+{%- if settings.social_facebook_link != blank -%}{%- assign social_sameas = social_sameas | append: settings.social_facebook_link | append: '~|~' -%}{%- endif -%}
+{%- if settings.social_twitter_link != blank -%}{%- assign social_sameas = social_sameas | append: settings.social_twitter_link | append: '~|~' -%}{%- endif -%}
+{%- if settings.social_pinterest_link != blank -%}{%- assign social_sameas = social_sameas | append: settings.social_pinterest_link | append: '~|~' -%}{%- endif -%}
+{%- if settings.social_instagram_link != blank -%}{%- assign social_sameas = social_sameas | append: settings.social_instagram_link | append: '~|~' -%}{%- endif -%}
+{%- if settings.social_snapchat_link != blank -%}{%- assign social_sameas = social_sameas | append: settings.social_snapchat_link | append: '~|~' -%}{%- endif -%}
+{%- if settings.social_tumblr_link != blank -%}{%- assign social_sameas = social_sameas | append: settings.social_tumblr_link | append: '~|~' -%}{%- endif -%}
+{%- if settings.social_linkedin_link != blank -%}{%- assign social_sameas = social_sameas | append: settings.social_linkedin_link | append: '~|~' -%}{%- endif -%}
+{%- if settings.social_youtube_link != blank -%}{%- assign social_sameas = social_sameas | append: settings.social_youtube_link | append: '~|~' -%}{%- endif -%}
+{%- if settings.social_vimeo_link != blank -%}{%- assign social_sameas = social_sameas | append: settings.social_vimeo_link | append: '~|~' -%}{%- endif -%}
+{%- assign social_sameas_arr = social_sameas | split: '~|~' -%}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": {{ shop.name | json }},
+  "url": "{{ shop.url }}{{ routes.root_url }}",
+  {%- if shop.description != blank %}
+  "description": {{ shop.description | strip_html | json }},
+  {%- endif %}
+  {%- if schema_logo != blank %}
+  "logo": "https:{{ schema_logo | img_url: '512x512' }}",
+  {%- endif %}
+  {%- if social_sameas_arr.size > 0 %}
+  "sameAs": [
+    {%- for link in social_sameas_arr -%}
+    {{ link | json }}{%- unless forloop.last -%},{%- endunless -%}
+    {%- endfor -%}
+  ]
+  {%- else %}
+  "sameAs": []
+  {%- endif %}
+}
+</script>

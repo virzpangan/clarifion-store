@@ -1,0 +1,79 @@
+{%- comment -%}
+  BreadcrumbList JSON-LD. Emitted independently of settings.show_breadcrumbs
+  (the visual nav toggle) so crawlers get breadcrumb data regardless.
+  Mirrors the trail logic in snippets/breadcrumbs.liquid.
+{%- endcomment -%}
+{%- unless template.name == 'index' or template.name == 'cart' -%}
+{%- assign crumb_pos = 1 -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": {{ 'general.breadcrumbs.home' | t | json }},
+      "item": "{{ shop.url }}{{ routes.root_url }}"
+    }
+    {%- if template.name == 'product' -%}
+      {%- if collection and collection.handle -%}
+        {%- assign crumb_pos = crumb_pos | plus: 1 -%}
+        ,{
+          "@type": "ListItem",
+          "position": {{ crumb_pos }},
+          "name": {{ collection.title | json }},
+          "item": "{{ shop.url }}/collections/{{ collection.handle }}"
+        }
+      {%- endif -%}
+      {%- assign crumb_pos = crumb_pos | plus: 1 -%}
+      ,{
+        "@type": "ListItem",
+        "position": {{ crumb_pos }},
+        "name": {{ product.title | json }},
+        "item": "{{ shop.url }}{{ product.url }}"
+      }
+    {%- elsif template.name == 'collection' and collection.handle -%}
+      {%- assign crumb_pos = crumb_pos | plus: 1 -%}
+      ,{
+        "@type": "ListItem",
+        "position": {{ crumb_pos }},
+        "name": {{ collection.title | json }},
+        "item": "{{ shop.url }}/collections/{{ collection.handle }}"
+      }
+    {%- elsif template.name == 'blog' -%}
+      {%- assign crumb_pos = crumb_pos | plus: 1 -%}
+      ,{
+        "@type": "ListItem",
+        "position": {{ crumb_pos }},
+        "name": {{ blog.title | json }},
+        "item": "{{ shop.url }}{{ blog.url }}"
+      }
+    {%- elsif template.name == 'article' -%}
+      {%- assign crumb_pos = crumb_pos | plus: 1 -%}
+      ,{
+        "@type": "ListItem",
+        "position": {{ crumb_pos }},
+        "name": {{ blog.title | json }},
+        "item": "{{ shop.url }}{{ blog.url }}"
+      }
+      {%- assign crumb_pos = crumb_pos | plus: 1 -%}
+      ,{
+        "@type": "ListItem",
+        "position": {{ crumb_pos }},
+        "name": {{ article.title | json }},
+        "item": "{{ shop.url }}{{ article.url }}"
+      }
+    {%- elsif template.name == 'page' -%}
+      {%- assign crumb_pos = crumb_pos | plus: 1 -%}
+      ,{
+        "@type": "ListItem",
+        "position": {{ crumb_pos }},
+        "name": {{ page.title | json }},
+        "item": "{{ shop.url }}{{ page.url }}"
+      }
+    {%- endif -%}
+  ]
+}
+</script>
+{%- endunless -%}
