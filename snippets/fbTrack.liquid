@@ -83,6 +83,18 @@
       </div>
     {%endif%}
 	<div class="shopCurrency" style="display:none;">{{shop.currency}}</div>
-	<script src="{{ 'api.jquery.js' | shopify_asset_url }}" defer="defer"></script>
 {%endif%}
-<script src="https://multifbpixels.website/pull/{{shop.permanent_domain}}/hook.js?1642240431" defer="defer"></script>
+<script>
+  window.themeIdle(function () {
+    {%- if shop.metafields.FacebookPixelCode != blank -%}
+    var jq = document.createElement('script');
+    jq.src = {{ 'api.jquery.js' | shopify_asset_url | json }};
+    jq.defer = true;
+    document.body.appendChild(jq);
+    {%- endif -%}
+    var hook = document.createElement('script');
+    hook.src = 'https://multifbpixels.website/pull/{{ shop.permanent_domain }}/hook.js?1642240431';
+    hook.defer = true;
+    document.body.appendChild(hook);
+  }, 4000);
+</script>

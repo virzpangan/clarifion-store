@@ -55,7 +55,28 @@
 
 <script src="https://widget.sezzle.com/v1/javascript/price-widget?uuid=89debe2a-d36a-44fb-a5ff-94eeadb63aa9"></script>
 
-{{ amzScript }}
+{%- if amzScript != blank -%}
+<template id="AmzPrimeScript">{{ amzScript }}</template>
+<script>
+  window.themeIdle(function () {
+    var tpl = document.getElementById('AmzPrimeScript');
+    if (!tpl) return;
+    var nodes = tpl.content.cloneNode(true);
+    Array.prototype.slice.call(nodes.querySelectorAll('script')).forEach(function (old) {
+      var s = document.createElement('script');
+      if (old.src) {
+        s.src = old.src;
+        s.async = true;
+      } else {
+        s.text = old.textContent;
+      }
+      document.body.appendChild(s);
+      if (old.parentNode) old.parentNode.removeChild(old);
+    });
+    document.body.appendChild(nodes);
+  }, 4000);
+</script>
+{%- endif -%}
 
 {{product.metafields.shogun.below}}
 
@@ -98,8 +119,11 @@
 	});
 </script>
 
-<script src="https://widget.reviews.io/polaris/build.js"></script>
 <script>
+window.themeIdle(function () {
+  var s = document.createElement('script');
+  s.src = 'https://widget.reviews.io/polaris/build.js';
+  s.onload = function () {
 new ReviewsWidget('#ReviewsWidget', {
 //Your REVIEWS.io Store ID and widget type:
 store: 'clarifion',
@@ -122,7 +146,7 @@ options: {
     product_review: {
       min_rating: 4,
       sku: "{{ product.variants | map: 'sku' | join: ';' }};{{ product.variants | map: 'id' | join: ';' }}",
-      enable_rich_snippets: true,
+      enable_rich_snippets: false,
 
       /* Your custom Structured Data */
       structured_data: {
@@ -387,6 +411,9 @@ styles: {
     '--pagination-tab-border-width': '3px',
 },
 });
+  };
+  document.body.appendChild(s);
+}, 5000);
 </script>
 
 {% if product.id == 6748462612564 %}

@@ -26,11 +26,16 @@
       "priceCurrency": "{{ shop.currency }}",
       "url": "{{ shop.url }}{{ product.url }}"
     },
-    "brand": {{ product.vendor | json }},
+    "brand": {
+      "@type": "Brand",
+      "name": {{ product.vendor | json }}
+    },
     {% if settings.sku_enable %}{% if current_variant.sku %}"sku": "{{ current_variant.sku }}",{% endif %}{% endif %}
     "name": {{ product.title | json }},
     "description": {{ product.description | strip_html | json }},
-    "category": "",
+    {%- if product.type != blank -%}
+    "category": {{ product.type | json }},
+    {%- endif %}
     "url": "{{ shop.url }}{{ product.url }}",
     {% if review_rating and review_count > 0 %}
     "aggregateRating": {

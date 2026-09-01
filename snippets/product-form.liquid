@@ -88,8 +88,22 @@
     </button>
 
     <!-- Beginning of Buy With Prime Widget -->
-    <script defer src="https://code.buywithprime.amazon.com/default.variant.selector.shopify.js"></script>
-    <script async fetchpriority="high" src="https://code.buywithprime.amazon.com/bwp.v1.js"></script>
+    <script>
+      window.themeIdle(function () {
+        if (!document.querySelector('script[src*="default.variant.selector.shopify.js"]')) {
+          var variantScript = document.createElement('script');
+          variantScript.src = 'https://code.buywithprime.amazon.com/default.variant.selector.shopify.js';
+          variantScript.defer = true;
+          document.body.appendChild(variantScript);
+        }
+        if (!document.querySelector('script[src*="bwp.v1.js"]')) {
+          var bwpScript = document.createElement('script');
+          bwpScript.src = 'https://code.buywithprime.amazon.com/bwp.v1.js';
+          bwpScript.async = true;
+          document.body.appendChild(bwpScript);
+        }
+      }, 4000);
+    </script>
 
     {% if product.sku %}
       <div

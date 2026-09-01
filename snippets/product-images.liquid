@@ -47,24 +47,27 @@
                 <div class="image-wrap
                   {% if has_product_video and video_type == 'youtube' %} hide{% endif %}
                   {% if has_product_video and video_type == 'vimeo' %} hide{% endif %}
-                  {% if has_product_video and video_type == 'mp4' %} hide{% endif %}" style="height: 0; padding-bottom: {{ 100 | divided_by: image.aspect_ratio }}%;">
+                  {% if has_product_video and video_type == 'mp4' %} hide{% endif %}" style="height: 0; padding-bottom: {{ 100 | divided_by: image.aspect_ratio }}%;{% if is_featured %} position: relative;{% endif %}">
                   {%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
                   {%- assign zoom_img_url = image | img_url: product_zoom_size -%}
 
                   {% if is_featured %}
-                    <img class="{% if settings.product_zoom_enable %}photoswipe__image{% endif %} lazyload"
-                      data-photoswipe-src="{{ zoom_img_url }}"
-                      data-photoswipe-width="{{ image.width }}"
-                      data-photoswipe-height="{{ image.height }}"
-                      data-index="{{ forloop.index }}"
+                    <img
+                      class="{% if settings.product_zoom_enable %}photoswipe__image{% endif %} lazyloaded"
+                      src="{{ image | img_url: product_image_size }}"
                       data-src="{{ img_url }}"
                       data-widths="[360, 540, 720, 900, 1080]"
                       data-aspectratio="{{ image.aspect_ratio }}"
                       data-sizes="auto"
-                      alt="{{ image_alt | escape }}">
-                    <noscript>
-                      <img class="lazyloaded" src="{{ image | img_url: product_image_size }}" alt="{{ image_alt | escape }}">
-                    </noscript>
+                      loading="eager"
+                      fetchpriority="high"
+                      decoding="async"
+                      data-photoswipe-src="{{ zoom_img_url }}"
+                      data-photoswipe-width="{{ image.width }}"
+                      data-photoswipe-height="{{ image.height }}"
+                      data-index="{{ forloop.index }}"
+                      alt="{{ image_alt | escape }}"
+                      style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain;">
                   {% else %}
                     <img class="{% if settings.product_zoom_enable %}photoswipe__image{% endif %} lazyload"
                       data-photoswipe-src="{{ zoom_img_url }}"

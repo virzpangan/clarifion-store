@@ -26,14 +26,10 @@ assign lpv_value = current_slug_path
 {% if lpv_value != blank %}
   <script>
     (function () {
-      // LPV tracking only runs when custom.landing_page_lpv has a value
       var lpvValue = {{ lpv_value | json }};
-      var currentUrl = new URL(window.location.href);
-
-      currentUrl.searchParams.set("lpv", lpvValue);
-
-      window.history.replaceState(null, "", currentUrl.toString());
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: 'lpv', lpv: lpvValue });
+      document.cookie = 'lpv=' + encodeURIComponent(lpvValue) + '; path=/; max-age=1800; SameSite=Lax';
     })();
   </script>
-
 {% endif %}

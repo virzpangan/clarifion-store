@@ -86,7 +86,7 @@
     "cart_type": "drawer",
     "cart_additional_buttons": false,
     "cart_notes_enable": false,
-    "cart_terms_conditions_enable": true,
+    "cart_terms_conditions_enable": false,
     "cart_terms_conditions_link": "shopify://policies/terms-of-service",
     "enable_currencies": false,
     "currency_format": "money_format",

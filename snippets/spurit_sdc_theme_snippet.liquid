@@ -89,5 +89,14 @@
 
 <div id="discount-bar"></div>
 
-    <script src="https://cdn-spurit.com/shopify-apps/share-discounts/common.js"></script>
-    <link href="https://cdn-spurit.com/shopify-apps/share-discounts/common.css" rel="stylesheet" type="text/css" media="all">
+<script>
+  window.themeIdle(function () {
+    var css = document.createElement('link');
+    css.rel = 'stylesheet';
+    css.href = 'https://cdn-spurit.com/shopify-apps/share-discounts/common.css';
+    document.head.appendChild(css);
+    var js = document.createElement('script');
+    js.src = 'https://cdn-spurit.com/shopify-apps/share-discounts/common.js';
+    document.body.appendChild(js);
+  }, 4000);
+</script>

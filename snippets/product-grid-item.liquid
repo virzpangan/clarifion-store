@@ -62,9 +62,46 @@
       {%- assign fixed_aspect_ratio = true -%}
     {% endunless %}
 
+    {%- assign eager_image = false -%}
+    {%- if template.name == 'collection' and product.featured_image and forloop.index and forloop.index <= 2 -%}
+      {%- assign eager_image = true -%}
+    {%- endif -%}
+
     <a href="{{ product.url | within: collection }}" class="grid-product__link {% if sold_out %} grid-product__link--disabled{% endif %}">
       <div class="grid-product__image-mask">
-        {% if fixed_aspect_ratio %}
+        {% if eager_image %}
+          {%- if fixed_aspect_ratio -%}
+            <div class="grid__image-ratio grid__image-ratio--{{ settings.product_grid_image_size }} lazyloaded" style="position: relative;">
+              <img
+                class="grid-product__image"
+                src="{{ product.featured_image | img_url: '540x' }}"
+                srcset="{{ product.featured_image | img_url: '360x' }} 360w, {{ product.featured_image | img_url: '540x' }} 540w, {{ product.featured_image | img_url: '720x' }} 720w"
+                sizes="(max-width: 589px) 50vw, 25vw"
+                width="{{ product.featured_image.width }}"
+                height="{{ product.featured_image.height }}"
+                loading="eager"
+                {% if forloop.index == 1 %}fetchpriority="high"{% endif %}
+                decoding="async"
+                alt="{{ product.featured_image.alt | default: product.title | escape }}"
+                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain;">
+            </div>
+          {%- else -%}
+            <div class="image-wrap"
+              style="height: 0; padding-bottom: {{ 100 | divided_by: product.featured_image.aspect_ratio }}%;">
+              <img
+                class="grid-product__image"
+                src="{{ product.featured_image | img_url: '540x' }}"
+                srcset="{{ product.featured_image | img_url: '360x' }} 360w, {{ product.featured_image | img_url: '540x' }} 540w, {{ product.featured_image | img_url: '720x' }} 720w"
+                sizes="(max-width: 589px) 50vw, 25vw"
+                width="{{ product.featured_image.width }}"
+                height="{{ product.featured_image.height }}"
+                loading="eager"
+                {% if forloop.index == 1 %}fetchpriority="high"{% endif %}
+                decoding="async"
+                alt="{{ product.featured_image.alt | default: product.title | escape }}">
+            </div>
+          {%- endif -%}
+        {% elsif fixed_aspect_ratio %}
           <div
             class="grid__image-ratio grid__image-ratio--{{ settings.product_grid_image_size }} lazyload"
             data-bgset="{% include 'bgset', image: product.featured_image %}"

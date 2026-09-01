@@ -1,4 +1,10 @@
-{{ 'slick-theme.css' | asset_url | stylesheet_tag }}
+<link
+  rel="stylesheet"
+  href="{{ 'slick-theme.css' | asset_url }}"
+  media="print"
+  onload="this.onload=null;this.media='all'"
+>
+<noscript>{{ 'slick-theme.css' | asset_url | stylesheet_tag }}</noscript>
 <style>
     .sc-banner-slider {
       overflow: hidden;
@@ -22,20 +28,6 @@
       background-position: center;
     }
 
-    .slider-bg.bogo {
-      background-image: url('https://cdn.shopify.com/s/files/1/0268/0638/6772/files/bg-bogo-ionizer.webp?v=1787302376');
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center;
-    }
-
-      .slider-bg.bogo2 {
-      background-image: url('https://cdn.shopify.com/s/files/1/0268/0638/6772/files/bg-bogo2-ionizer.webp?v=1787302530');
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center;
-    }
-
     .slider-bg.bg3 {
       background-image: url('https://cdn.shopify.com/s/files/1/0268/0638/6772/files/slide3-bg.webp?v=1779830139');
       background-repeat: no-repeat;
@@ -54,6 +46,13 @@
 
       .slider-bg.bg5 {
       background-image: url('https://cdn.shopify.com/s/files/1/0268/0638/6772/files/fd-bg-opt.webp?v=1781577181');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+    }
+
+      .slider-bg.labor26 {
+      background-image: url('https://cdn.shopify.com/s/files/1/0268/0638/6772/files/labor26-banner.webp?v=1788228840');
       background-repeat: no-repeat;
       background-size: cover;
       background-position: center;
@@ -254,6 +253,7 @@
       margin: 0 auto;
       padding: 120px 20px;
       color: #fff;
+      text-align: center;
     }
 
     .sc-banner-kicker {
@@ -381,11 +381,11 @@
     }
 
     .coupon-banner {
-    display: inline-flex;
+    display: inline-block;
     align-items: center;
     gap: 12px;
 
-    padding: 8px 12px;
+    padding: 10px 20px;
     border: 2px dashed #6aa0f6;
     border-radius: 10px;
 
@@ -412,6 +412,8 @@
   }
 
   .code {
+    margin-top: 6px;
+    display:inline-block;
     font-size: 26px;
     font-weight: 500;
     color: #ffffff;
@@ -448,23 +450,17 @@
     background: #000;
   }
 
-  .video-poster1 {
+  .sc-banner-slider .slider-bg.video-slide .video-poster,
+  .sc-banner-slider .slider-bg.video-slide .video-poster1,
+  .sc-banner-slider .slider-bg.video-slide .video-poster2 {
     position: absolute;
     inset: 0;
     z-index: 0;
-    background-image: url('https://cdn.shopify.com/s/files/1/0268/0638/6772/files/clf-ctv-poster.webp?v=1781663592');
-    background-size: cover;
-    background-position: center;
-    transition: opacity 0.45s ease, visibility 0.45s ease;
-  }
-
-  .video-poster2 {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    background-image: url('https://cdn.shopify.com/s/files/1/0268/0638/6772/files/smk-poster2.webp?v=1784638396');
-    background-size: cover;
-    background-position: center;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transform: none;
     transition: opacity 0.45s ease, visibility 0.45s ease;
   }
 
@@ -477,9 +473,12 @@
     object-fit: cover;
   }
 
-  .slider-bg.video-slide.video-ready .video-poster {
+  .slider-bg.video-slide.video-ready .video-poster,
+  .slider-bg.video-slide.video-ready .video-poster1,
+  .slider-bg.video-slide.video-ready .video-poster2 {
     opacity: 0;
     visibility: hidden;
+    pointer-events: none;
   }
 
   .slider-bg.video-slide .container {
@@ -565,21 +564,26 @@
 <div class="cla-home">
   <div class="sc-banner-slider">
     <div>
-      <div class="slider-bg bogo2">
+      <div class="slider-bg labor26">
         <div class="container">
-          <!-- Slide 2 -->
+          <!-- Labor Day -->
           <div class="row">
             <div class="col-md-12 text-center">
               <div class="sc-banner-content">
-                <span class="sc-banner-kicker">3 DAYS ONLY!</span>
+                <span class="sc-banner-kicker">LIMITED-TIME HOLIDAY OFFER</span>
 
-                <h2 style="margin-bottom:34px">
-                  BUY 3, GET 3 FREE <br>
-                  6 Clarifion Ionizers for $129.99
-                </h2>
-                <p>Buy More, Get More Free</p>
-                <a href="./products/ionizer-bogo-sale?variant=51618826387762" class="sc-banner-btn">
-                  Shop Now
+                <h2>Labor Day Sale</h2>
+
+                <div class="coupon-banner">
+                  <div>
+                    <span class="discount">20%</span>
+                    <span class="text">OFF SITEWIDE*</span>
+                  </div>
+                  <span class="code">Code: TAKEABREAK20</span>
+                </div>
+                <p class="coupon-note">*Exclusions apply.</p>
+                <a href="./collections/all/" class="sc-banner-btn">
+                  SHOP NOW
                   <span></span>
                 </a>
               </div>
@@ -591,9 +595,18 @@
     <!-- Video Slide Canada Smoke -->
     <div>
       <div class="slider-bg video-slide">
-        <div class="video-poster2"></div>
+        <img
+          class="video-poster2"
+          src="https://cdn.shopify.com/s/files/1/0268/0638/6772/files/smk-poster2.webp?v=1784638396"
+          alt=""
+          width="1920"
+          height="768"
+          fetchpriority="high"
+          loading="eager"
+          decoding="async"
+        >
 
-        <video autoplay muted loop playsinline preload="auto">
+        <video muted loop playsinline preload="none">
           <source src="https://cdn.shopify.com/videos/c/o/v/1b028672d4494468b56eb828eeb48b0b.mp4" type="video/mp4">
         </video>
 
@@ -623,9 +636,17 @@
     <!-- Video Slide -->
     <div>
       <div class="slider-bg video-slide">
-        <div class="video-poster"></div>
+        <img
+          class="video-poster"
+          src="https://cdn.shopify.com/s/files/1/0268/0638/6772/files/clf-ctv-poster.webp?v=1781663592"
+          alt=""
+          width="1920"
+          height="768"
+          loading="lazy"
+          decoding="async"
+        >
 
-        <video autoplay muted loop playsinline preload="auto">
+        <video muted loop playsinline preload="none">
           <source src="https://cdn.shopify.com/videos/c/o/v/f123b572ffbd4b96a676334511b7afa5.mp4" type="video/mp4">
         </video>
 
@@ -899,8 +920,6 @@
         <div class="col-md-12">
           <h2>How Do Air Ionizers Work</h2>
           <div class="wrapper">
-            <script src="https://fast.wistia.com/embed/medias/o9anf2pry2.jsonp" async></script>
-            <script src="https://fast.wistia.com/assets/external/E-v1.js" async></script>
             <div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;">
               <div
                 class="wistia_responsive_wrapper"
@@ -919,6 +938,8 @@
                       style="filter:blur(5px);height:100%;object-fit:contain;width:100%;"
                       alt=""
                       aria-hidden="true"
+                      loading="lazy"
+                      decoding="async"
                       onload="this.parentNode.style.opacity=1;"
                     >
                   </div>
@@ -1004,64 +1025,136 @@
   </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
 <script>
-  $(document).on('ready', function () {
-    $('.review-slider').slick({
-      dots: true,
-      //arrows: true,
-      //autoplay: true,
-      autoplaySpeed: 5000,
-      fade: true,
-    });
-    $('.sc-banner-slider').slick({
-      dots: true,
-      arrows: true,
-      adaptiveHeight: true,
-      //autoplay: true,
-      //autoplaySpeed: 5000,
-      speed: 1200,
-      fade: true,
-      cssEase: 'cubic-bezier(0.7, 0, 0.3, 1)',
-      pauseOnHover: false,
-      pauseOnFocus: false,
-      infinite: true,
-      slidesToShow: 1,
-      slidesToScroll: 1,
-      prevArrow: `
-    <button type="button" class="sc-slider-arrow sc-slider-prev" aria-label="Previous slide">
-      <span></span>
-    </button>
-  `,
-      nextArrow: `
-    <button type="button" class="sc-slider-arrow sc-slider-next" aria-label="Next slide">
-      <span></span>
-    </button>
-  `,
-    });
-  });
-</script>
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    var videoSlides = document.querySelectorAll('.video-slide');
+  (function () {
+    function afterFirstPaint(fn) {
+      requestAnimationFrame(function () {
+        requestAnimationFrame(fn);
+      });
+    }
 
-    videoSlides.forEach(function (slide) {
+    function afterLcp(fn) {
+      var done = false;
+      var finish = function () {
+        if (done) return;
+        done = true;
+        fn();
+      };
+      setTimeout(finish, 4000);
+      try {
+        var po = new PerformanceObserver(function (list) {
+          if (list.getEntries().length) {
+            try {
+              po.disconnect();
+            } catch (e) {}
+            finish();
+          }
+        });
+        po.observe({ type: 'largest-contentful-paint', buffered: true });
+      } catch (e) {
+        if (document.readyState === 'complete') finish();
+        else window.addEventListener('load', finish);
+      }
+    }
+
+    function playSlideVideo(slide) {
+      document.querySelectorAll('.sc-banner-slider video').forEach(function (video) {
+        video.pause();
+        var parent = video.closest('.video-slide');
+        if (parent) parent.classList.remove('video-ready');
+      });
+      if (!slide) return;
       var video = slide.querySelector('video');
-
       if (!video) return;
-
-      function showVideo() {
-        slide.classList.add('video-ready');
-      }
-
+      var show = function () {
+        var playPromise = video.play();
+        if (playPromise && playPromise.then) {
+          playPromise
+            .then(function () {
+              var parent = video.closest('.video-slide');
+              if (parent) parent.classList.add('video-ready');
+            })
+            .catch(function () {});
+        }
+      };
       if (video.readyState >= 3) {
-        showVideo();
+        show();
       } else {
-        video.addEventListener('canplay', showVideo, { once: true });
-        video.addEventListener('playing', showVideo, { once: true });
+        video.addEventListener('canplay', show, { once: true });
+        video.load();
       }
-    });
-  });
+    }
+
+    function initHomeSliders() {
+      if (!window.jQuery || !jQuery.fn.slick) {
+        setTimeout(initHomeSliders, 50);
+        return;
+      }
+      var $ = jQuery;
+      $('.review-slider').slick({
+        dots: true,
+        autoplaySpeed: 5000,
+        fade: true,
+      });
+      $('.sc-banner-slider').slick({
+        dots: true,
+        arrows: true,
+        adaptiveHeight: true,
+        speed: 1200,
+        fade: true,
+        cssEase: 'cubic-bezier(0.7, 0, 0.3, 1)',
+        pauseOnHover: false,
+        pauseOnFocus: false,
+        infinite: true,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        prevArrow:
+          '<button type="button" class="sc-slider-arrow sc-slider-prev" aria-label="Previous slide"><span></span></button>',
+        nextArrow:
+          '<button type="button" class="sc-slider-arrow sc-slider-next" aria-label="Next slide"><span></span></button>',
+      });
+      $('.sc-banner-slider').on('afterChange', function (event, slick, currentSlide) {
+        var slide = slick.$slides.get(currentSlide);
+        if (slide) playSlideVideo(slide.querySelector('.video-slide') || slide);
+      });
+      slickReady = true;
+      maybePlayFirst();
+    }
+
+    var slickReady = false;
+    var lcpReady = false;
+
+    function maybePlayFirst() {
+      if (!slickReady || !lcpReady) return;
+      var first =
+        document.querySelector('.sc-banner-slider .slick-current .video-slide') ||
+        document.querySelector('.sc-banner-slider .video-slide');
+      playSlideVideo(first);
+    }
+
+    function start() {
+      afterFirstPaint(initHomeSliders);
+      afterLcp(function () {
+        lcpReady = true;
+        maybePlayFirst();
+        if (window.themeIdle) {
+          window.themeIdle(function () {
+            if (document.querySelector('script[src*="fast.wistia.com/assets/external/E-v1.js"]')) return;
+            var wistia = document.createElement('script');
+            wistia.src = 'https://fast.wistia.com/assets/external/E-v1.js';
+            wistia.async = true;
+            document.body.appendChild(wistia);
+          }, 4000);
+        }
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', start);
+    } else {
+      start();
+    }
+  })();
 </script>
 <script>
   window.addEventListener('DOMContentLoaded', () => {
